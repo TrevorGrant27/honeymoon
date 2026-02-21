@@ -173,9 +173,6 @@ export default function AdminDashboard() {
           <h1 className="font-display font-bold text-xl text-dark-brown">
             Admin Dashboard
           </h1>
-          <a href="/" className="text-warm-brown hover:text-rose text-sm">
-            View Registry &rarr;
-          </a>
         </div>
       </header>
 
