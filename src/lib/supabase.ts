@@ -8,6 +8,9 @@ export const supabase: SupabaseClient = supabaseUrl
   : (null as unknown as SupabaseClient);
 
 export function getServiceSupabase() {
-  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || "";
+  if (!supabaseUrl || !serviceKey) {
+    return null as unknown as SupabaseClient;
+  }
   return createClient(supabaseUrl, serviceKey);
 }
