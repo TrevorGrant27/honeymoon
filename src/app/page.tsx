@@ -182,6 +182,12 @@ export default function HomePage() {
         <p>
           Made with love for Trevor &amp; Carly&apos;s honeymoon adventure ✈️
         </p>
+        <a
+          href="/admin"
+          className="inline-block mt-2 text-xs text-muted-brown/50 hover:text-warm-brown transition-colors"
+        >
+          Admin
+        </a>
       </footer>
 
       {/* Experience Detail Modal */}
