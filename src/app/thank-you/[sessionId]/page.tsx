@@ -13,7 +13,7 @@ export default function ThankYouPage({
 
   function handleShare() {
     const url = window.location.origin;
-    const text = "I just sponsored an experience on Trevor & Carly's honeymoon registry! Check it out:";
+    const text = "I just gifted an experience on Trevor & Carly's honeymoon registry! Check it out:";
     if (navigator.share) {
       navigator.share({ title: "Trevor & Carly's Honeymoon", text, url }).catch(() => {});
     } else {
@@ -28,50 +28,51 @@ export default function ThankYouPage({
     <main className="min-h-screen bg-cream flex items-center justify-center">
       <Confetti />
 
-      <div className="max-w-lg mx-auto px-4 text-center">
-        <span className="text-7xl block mb-6">🎉</span>
-        <h1 className="font-display font-bold text-4xl sm:text-5xl text-dark-brown mb-4">
-          Thank You!
+      <div className="max-w-md mx-auto px-4 text-center">
+        <p className="divider-ornament text-muted-brown text-sm max-w-xs mx-auto mb-8">
+          &hearts;
+        </p>
+        <h1 className="font-display font-semibold text-4xl sm:text-5xl text-dark-brown mb-4">
+          Thank You
         </h1>
-        <p className="text-warm-brown text-lg leading-relaxed mb-4">
-          Your sponsorship means the world to Trevor &amp; Carly. You&apos;re
-          helping create an unforgettable honeymoon memory!
+        <p className="text-warm-brown text-base leading-relaxed mb-6">
+          Your gift means the world to Trevor &amp; Carly.
+          You&apos;re helping create an unforgettable honeymoon memory.
         </p>
 
-        {/* Preview card */}
-        <div className="bg-sand rounded-[20px] border-2 border-border p-6 mb-6">
+        {/* Preview */}
+        <div className="bg-white rounded-2xl border border-border p-6 mb-5">
           <p className="text-warm-brown text-sm mb-3">
-            Your name will appear on the experience card so everyone can see your generous gift.
+            Your name will appear on the experience card for all to see.
           </p>
-          <div className="bg-cream rounded-xl p-4 inline-flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-coral/20 flex items-center justify-center text-coral font-bold text-sm">
+          <div className="bg-sand/50 rounded-xl p-3 inline-flex items-center gap-3">
+            <div className="w-9 h-9 rounded-full bg-rose/15 flex items-center justify-center text-rose font-medium text-xs">
               You
             </div>
-            <span className="text-dark-brown font-medium text-sm">Your Name &middot; Your Gift</span>
+            <span className="text-dark-brown text-sm">Your Name &middot; Your Gift</span>
           </div>
         </div>
 
-        {/* Email confirmation */}
-        <div className="bg-sand rounded-[20px] border-2 border-border p-5 mb-6">
-          <span className="text-2xl block mb-2">💌</span>
-          <p className="text-warm-brown text-sm">
+        {/* Email */}
+        <div className="bg-white rounded-2xl border border-border p-5 mb-8">
+          <p className="text-muted-brown text-sm">
             A confirmation has been sent to your email.
           </p>
         </div>
 
         {/* Actions */}
-        <div className="flex flex-col sm:flex-row gap-3 mb-4">
+        <div className="flex flex-col sm:flex-row gap-3">
           <a
             href="/"
-            className="btn-primary flex-1 inline-block px-6 py-4 rounded-[14px] bg-gradient-to-r from-coral to-deep-coral text-white font-semibold text-lg shadow-md text-center"
+            className="btn-primary flex-1 inline-block px-6 py-4 rounded-full bg-rose text-white font-medium text-base tracking-wide shadow-sm text-center"
           >
-            Sponsor Another
+            Gift Another
           </a>
           <button
             onClick={handleShare}
-            className="flex-1 px-6 py-4 rounded-[14px] bg-sand border-2 border-border text-dark-brown font-semibold text-lg hover:bg-border transition-colors text-center"
+            className="flex-1 px-6 py-4 rounded-full bg-white border border-border text-dark-brown font-medium text-base hover:bg-sand transition-colors text-center"
           >
-            {copied ? "Link Copied!" : "Share Registry"}
+            {copied ? "Copied!" : "Share Registry"}
           </button>
         </div>
       </div>

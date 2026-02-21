@@ -27,10 +27,10 @@ export function CategoryFilter({ selected, onChange }: CategoryFilterProps) {
             <button
               key={cat.value}
               onClick={() => onChange(cat.value)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap flex-shrink-0 ${
+              className={`px-4 py-2 rounded-full text-sm transition-all whitespace-nowrap flex-shrink-0 border ${
                 isActive
-                  ? "bg-coral/10 border-2 border-coral text-dark-brown"
-                  : "bg-sand border-2 border-transparent text-warm-brown hover:border-border"
+                  ? "bg-rose/10 border-rose/40 text-dark-brown font-medium"
+                  : "bg-white border-border text-warm-brown hover:border-rose/30"
               }`}
             >
               {cat.value !== "all" && (
@@ -41,7 +41,6 @@ export function CategoryFilter({ selected, onChange }: CategoryFilterProps) {
           );
         })}
       </div>
-      {/* Fade edges on mobile */}
       <div className="pointer-events-none absolute top-0 right-0 bottom-2 w-8 bg-gradient-to-l from-cream to-transparent sm:hidden" />
     </div>
   );

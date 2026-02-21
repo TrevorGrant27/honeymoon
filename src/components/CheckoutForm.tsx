@@ -28,7 +28,6 @@ export function CheckoutForm({ experience, preselectedAmountCents }: CheckoutFor
   const remainingCents = experience.price_cents - experience.funded_cents;
   const allowSplit = experience.allow_splitting && remainingCents > experience.min_split_cents;
 
-  // If amount preselected from modal, skip straight to info step
   const hasPreselection = preselectedAmountCents && preselectedAmountCents > 0;
   const initialAmount = hasPreselection
     ? Math.min(preselectedAmountCents, remainingCents)
@@ -90,23 +89,23 @@ export function CheckoutForm({ experience, preselectedAmountCents }: CheckoutFor
   }
 
   return (
-    <div className="max-w-lg mx-auto">
+    <div className="max-w-md mx-auto">
       {/* Experience Header */}
       <div className="text-center mb-8">
         <span className="text-5xl block mb-3">{experience.emoji}</span>
-        <h1 className="font-display font-bold text-2xl text-dark-brown mb-1">
+        <h1 className="font-display font-semibold text-2xl text-dark-brown mb-1">
           {experience.title}
         </h1>
-        <p className="text-warm-brown">{formatCents(remainingCents)} remaining</p>
+        <p className="text-muted-brown text-sm">{formatCents(remainingCents)} remaining</p>
       </div>
 
       {/* Step 1: Amount Selection */}
       {step === "amount" && allowSplit && (
-        <div className="bg-white rounded-[20px] border-2 border-border p-6 mb-6">
-          <h2 className="font-display font-semibold text-lg text-dark-brown mb-4">
-            Choose Your Contribution
+        <div className="bg-white rounded-2xl border border-border p-6 mb-6">
+          <h2 className="font-display font-medium text-base text-dark-brown mb-4">
+            Choose your contribution
           </h2>
-          <div className="grid grid-cols-2 gap-3 mb-4">
+          <div className="grid grid-cols-2 gap-2.5 mb-4">
             {presets.map((amt) => (
               <button
                 key={amt}
@@ -114,10 +113,10 @@ export function CheckoutForm({ experience, preselectedAmountCents }: CheckoutFor
                   setAmountCents(amt);
                   setCustomAmount("");
                 }}
-                className={`py-3 rounded-xl font-display font-bold text-lg transition-all ${
+                className={`py-3 rounded-xl font-display font-semibold text-base transition-all border ${
                   amountCents === amt
-                    ? "bg-coral text-white shadow-md"
-                    : "bg-sand text-dark-brown hover:bg-border"
+                    ? "bg-rose text-white border-rose shadow-sm"
+                    : "bg-cream text-dark-brown border-border hover:border-rose/40"
                 }`}
               >
                 {amt === remainingCents ? `${formatCents(amt)} (All)` : formatCents(amt)}
@@ -125,9 +124,8 @@ export function CheckoutForm({ experience, preselectedAmountCents }: CheckoutFor
             ))}
           </div>
 
-          {/* Custom amount */}
           <div className="relative">
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-warm-brown font-medium">
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-brown">
               $
             </span>
             <input
@@ -143,11 +141,11 @@ export function CheckoutForm({ experience, preselectedAmountCents }: CheckoutFor
                   setAmountCents(0);
                 }
               }}
-              className="w-full pl-8 pr-4 py-3 rounded-xl bg-cream border-2 border-border text-dark-brown focus:border-coral focus:outline-none transition-colors"
+              className="w-full pl-8 pr-4 py-3 rounded-xl bg-cream border border-border text-dark-brown focus:border-rose focus:outline-none transition-colors"
             />
           </div>
-          <p className="text-xs text-muted-brown mt-2">
-            Minimum contribution: {formatCents(experience.min_split_cents)}
+          <p className="text-[11px] text-muted-brown mt-2">
+            Minimum: {formatCents(experience.min_split_cents)}
           </p>
 
           <button
@@ -156,7 +154,7 @@ export function CheckoutForm({ experience, preselectedAmountCents }: CheckoutFor
               else setError("Please select a valid amount.");
             }}
             disabled={amountCents <= 0}
-            className="btn-primary w-full mt-4 py-3 rounded-[14px] bg-gradient-to-r from-coral to-deep-coral text-white font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+            className="btn-primary w-full mt-4 py-3 rounded-full bg-rose text-white font-medium disabled:opacity-40 disabled:cursor-not-allowed"
           >
             Continue &mdash; {amountCents > 0 ? formatCents(amountCents) : "Select amount"}
           </button>
@@ -166,23 +164,22 @@ export function CheckoutForm({ experience, preselectedAmountCents }: CheckoutFor
       {/* Step 2: Sponsor Info */}
       {step === "info" && (
         <form onSubmit={handleSubmit}>
-          <div className="bg-white rounded-[20px] border-2 border-border p-6 mb-6">
-            <h2 className="font-display font-semibold text-lg text-dark-brown mb-4">
-              Your Details
+          <div className="bg-white rounded-2xl border border-border p-6 mb-6">
+            <h2 className="font-display font-medium text-base text-dark-brown mb-4">
+              Your details
             </h2>
 
-            {/* Amount summary */}
             {allowSplit && (
-              <div className="flex items-center justify-between bg-sand rounded-xl px-4 py-3 mb-4">
-                <span className="text-warm-brown">Your contribution</span>
+              <div className="flex items-center justify-between bg-sand/50 rounded-xl px-4 py-3 mb-5 border border-border/40">
+                <span className="text-sm text-warm-brown">Your gift</span>
                 <div className="flex items-center gap-2">
-                  <span className="font-display font-bold text-dark-brown">
+                  <span className="font-display font-semibold text-dark-brown">
                     {formatCents(amountCents)}
                   </span>
                   <button
                     type="button"
                     onClick={() => setStep("amount")}
-                    className="text-xs text-coral hover:underline"
+                    className="text-[11px] text-rose hover:underline"
                   >
                     Change
                   </button>
@@ -190,9 +187,8 @@ export function CheckoutForm({ experience, preselectedAmountCents }: CheckoutFor
               </div>
             )}
 
-            {/* Display Name */}
-            <label className="block mb-1 text-sm font-medium text-dark-brown">
-              Your Name <span className="text-coral">*</span>
+            <label className="block mb-1.5 text-sm text-dark-brown">
+              Your Name <span className="text-rose">*</span>
             </label>
             <input
               type="text"
@@ -200,30 +196,29 @@ export function CheckoutForm({ experience, preselectedAmountCents }: CheckoutFor
               onChange={(e) => setDisplayName(e.target.value)}
               placeholder="How it appears on the card"
               required
-              className="w-full px-4 py-3 rounded-xl bg-cream border-2 border-border text-dark-brown focus:border-coral focus:outline-none transition-colors mb-4"
+              className="w-full px-4 py-3 rounded-xl bg-cream border border-border text-dark-brown focus:border-rose focus:outline-none transition-colors mb-5"
             />
 
-            {/* Note */}
-            <label className="block mb-1 text-sm font-medium text-dark-brown">
-              Personal Note <span className="text-muted-brown">(optional, private)</span>
+            <label className="block mb-1.5 text-sm text-dark-brown">
+              Personal Note <span className="text-muted-brown">(optional)</span>
             </label>
             <textarea
               value={note}
               onChange={(e) => setNote(e.target.value)}
               placeholder="A note for Trevor & Carly..."
               rows={3}
-              className="w-full px-4 py-3 rounded-xl bg-cream border-2 border-border text-dark-brown focus:border-coral focus:outline-none transition-colors resize-none"
+              className="w-full px-4 py-3 rounded-xl bg-cream border border-border text-dark-brown focus:border-rose focus:outline-none transition-colors resize-none"
             />
           </div>
 
           {error && (
-            <div className="text-center text-red-600 text-sm mb-4">{error}</div>
+            <div className="text-center text-rose text-sm mb-4">{error}</div>
           )}
 
           <button
             type="submit"
             disabled={loading}
-            className="btn-primary w-full py-4 rounded-[14px] bg-gradient-to-r from-coral to-deep-coral text-white font-semibold text-lg shadow-md disabled:opacity-50"
+            className="btn-primary w-full py-4 rounded-full bg-rose text-white font-medium text-base tracking-wide shadow-sm disabled:opacity-40"
           >
             {loading ? "Processing..." : `Proceed to Payment — ${formatCents(amountCents)}`}
           </button>

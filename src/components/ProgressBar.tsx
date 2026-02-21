@@ -5,7 +5,7 @@ import { getProgressPercentage } from "@/lib/utils";
 interface ProgressBarProps {
   funded: number;
   total: number;
-  variant?: "coral" | "green";
+  variant?: "rose" | "sage";
   animated?: boolean;
   className?: string;
 }
@@ -13,21 +13,21 @@ interface ProgressBarProps {
 export function ProgressBar({
   funded,
   total,
-  variant = "coral",
+  variant = "rose",
   animated = true,
   className = "",
 }: ProgressBarProps) {
   const pct = getProgressPercentage(funded, total);
   const isComplete = funded >= total;
-  const effectiveVariant = isComplete ? "green" : variant;
+  const effectiveVariant = isComplete ? "sage" : variant;
 
   return (
-    <div className={`h-2 w-full rounded-full bg-border ${className}`}>
+    <div className={`h-1.5 w-full rounded-full bg-border/60 ${className}`}>
       <div
         className={`h-full rounded-full ${animated ? "progress-bar-animated" : ""} ${
-          effectiveVariant === "green"
-            ? "bg-gradient-to-r from-success to-emerald-400"
-            : "bg-gradient-to-r from-coral to-deep-coral"
+          effectiveVariant === "sage"
+            ? "bg-gradient-to-r from-sage to-sage/70"
+            : "bg-gradient-to-r from-rose to-deep-rose"
         }`}
         style={{ width: `${pct}%` }}
       />

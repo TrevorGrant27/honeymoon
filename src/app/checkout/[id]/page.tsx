@@ -42,7 +42,7 @@ export default function CheckoutPage({
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="inline-block w-8 h-8 border-4 border-sand border-t-coral rounded-full animate-spin" />
+        <div className="inline-block w-6 h-6 border-2 border-border border-t-rose rounded-full animate-spin" />
       </div>
     );
   }
@@ -51,13 +51,12 @@ export default function CheckoutPage({
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <span className="text-5xl block mb-4">😔</span>
-          <p className="text-warm-brown text-lg">{error || "Something went wrong."}</p>
+          <p className="text-warm-brown text-lg mb-4">{error || "Something went wrong."}</p>
           <a
             href="/"
-            className="inline-block mt-4 px-6 py-3 rounded-[14px] bg-gradient-to-r from-coral to-deep-coral text-white font-semibold"
+            className="btn-primary inline-block px-8 py-3 rounded-full bg-rose text-white font-medium"
           >
-            Back to Experiences
+            Back to Registry
           </a>
         </div>
       </div>
@@ -66,13 +65,12 @@ export default function CheckoutPage({
 
   return (
     <main className="min-h-screen bg-cream">
-      {/* Header */}
-      <header className="bg-sand border-b-2 border-border">
+      <header className="border-b border-border">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-          <a href="/" className="text-warm-brown hover:text-dark-brown transition-colors">
-            &larr; Back to Experiences
+          <a href="/" className="text-sm text-warm-brown hover:text-dark-brown transition-colors">
+            &larr; Back
           </a>
-          <span className="font-display font-semibold text-dark-brown">
+          <span className="font-display font-medium text-dark-brown text-sm">
             Trevor &amp; Carly
           </span>
         </div>

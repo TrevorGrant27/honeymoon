@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const COLORS = ["#E8927C", "#D4785F", "#5DA06A", "#F5EDE0", "#8B7355", "#FFD700", "#FF6B6B"];
+const COLORS = ["#C9918F", "#B47B79", "#9CAF88", "#C5A572", "#E8DED2", "#B49CAF", "#D4BBA0"];
 
 interface ConfettiPiece {
   id: number;

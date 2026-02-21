@@ -49,7 +49,7 @@ export default function AdminLoginPage() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
               autoFocus
-              className="w-full px-4 py-3 rounded-xl bg-cream border-2 border-border text-dark-brown focus:border-coral focus:outline-none transition-colors mb-4"
+              className="w-full px-4 py-3 rounded-xl bg-cream border-2 border-border text-dark-brown focus:border-rose focus:outline-none transition-colors mb-4"
             />
 
             {error && (
@@ -59,7 +59,7 @@ export default function AdminLoginPage() {
             <button
               type="submit"
               disabled={loading || !password}
-              className="btn-primary w-full py-3 rounded-[14px] bg-gradient-to-r from-coral to-deep-coral text-white font-semibold disabled:opacity-50"
+              className="btn-primary w-full py-3 rounded-[14px] bg-gradient-to-r from-rose to-deep-rose text-white font-semibold disabled:opacity-50"
             >
               {loading ? "Signing in..." : "Sign In"}
             </button>
@@ -67,7 +67,7 @@ export default function AdminLoginPage() {
         </form>
 
         <p className="text-center mt-6">
-          <a href="/" className="text-warm-brown hover:text-coral text-sm">
+          <a href="/" className="text-warm-brown hover:text-rose text-sm">
             &larr; Back to registry
           </a>
         </p>

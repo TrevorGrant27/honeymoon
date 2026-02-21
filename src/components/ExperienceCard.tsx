@@ -15,9 +15,9 @@ function getUrgencyText(experience: ExperienceWithSponsors): string | null {
   const isFullyFunded = experience.funded_cents >= experience.price_cents;
   if (isFullyFunded) return null;
 
-  if (pct >= 75) return "Almost there!";
+  if (pct >= 75) return "Almost there";
   if (experience.sponsors.length > 0 && pct >= 50)
-    return `${experience.sponsors.length} sponsor${experience.sponsors.length > 1 ? "s" : ""} so far`;
+    return `${experience.sponsors.length} gift${experience.sponsors.length > 1 ? "s" : ""} so far`;
   return null;
 }
 
@@ -31,59 +31,57 @@ export function ExperienceCard({ experience, onClick }: ExperienceCardProps) {
   return (
     <button
       onClick={() => onClick(experience)}
-      className={`experience-card w-full text-left rounded-[20px] overflow-hidden border-2 ${
+      className={`experience-card w-full text-left rounded-2xl overflow-hidden border ${
         isFullyFunded
-          ? "border-success/30 bg-gradient-to-br from-success/5 to-cream"
-          : "border-border bg-gradient-to-br from-white to-cream"
-      } shadow-sm hover:shadow-lg`}
+          ? "border-sage/30 bg-white"
+          : "border-border bg-white"
+      } shadow-sm`}
     >
       {/* Image / Emoji Area */}
       <div
         className={`relative h-44 flex items-center justify-center ${
           isFullyFunded
-            ? "bg-gradient-to-br from-success/10 to-success/5"
-            : "bg-gradient-to-br from-sand to-cream"
+            ? "bg-sage/5"
+            : "bg-gradient-to-br from-sand/50 to-cream"
         }`}
       >
         {experience.image_url ? (
           <img
             src={experience.image_url}
             alt={experience.title}
-            className={`w-full h-full object-cover ${isFullyFunded ? "opacity-80" : ""}`}
+            className={`w-full h-full object-cover ${isFullyFunded ? "opacity-75" : ""}`}
           />
         ) : (
-          <span className="text-6xl">{experience.emoji || "✨"}</span>
+          <span className="text-5xl">{experience.emoji || "✨"}</span>
         )}
 
-        {/* Status badges */}
         {isFullyFunded && (
-          <div className="absolute top-3 right-3 bg-success text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md">
-            FULLY SPONSORED ✓
+          <div className="absolute top-3 right-3 bg-sage/90 text-white text-[10px] font-medium tracking-wide uppercase px-3 py-1.5 rounded-full">
+            Fully Gifted
           </div>
         )}
         {isPartiallyFunded && (
-          <div className="absolute top-3 right-3 bg-coral text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md">
-            {formatCents(remainingCents)} LEFT
+          <div className="absolute top-3 right-3 bg-white/90 text-rose text-[10px] font-medium tracking-wide uppercase px-3 py-1.5 rounded-full border border-rose/20">
+            {formatCents(remainingCents)} left
           </div>
         )}
       </div>
 
       {/* Content */}
       <div className="p-5">
-        <h3 className="font-display font-semibold text-lg text-dark-brown mb-1 leading-tight">
+        <h3 className="font-display font-semibold text-base text-dark-brown mb-1.5 leading-snug">
           {experience.title}
         </h3>
-        <p className="text-warm-brown text-sm line-clamp-2 mb-3">
+        <p className="text-warm-brown text-sm line-clamp-2 mb-4 leading-relaxed">
           {experience.description}
         </p>
 
-        {/* Price & Progress */}
-        <div className="flex items-center justify-between mb-2">
-          <span className="font-display font-bold text-xl text-dark-brown">
+        <div className="flex items-baseline justify-between mb-2">
+          <span className="font-display font-semibold text-lg text-dark-brown">
             {formatCents(experience.price_cents)}
           </span>
           {(isPartiallyFunded || isFullyFunded) && (
-            <span className="text-xs text-muted-brown font-medium">{pct}% funded</span>
+            <span className="text-[11px] text-muted-brown">{pct}% funded</span>
           )}
         </div>
 
@@ -91,28 +89,25 @@ export function ExperienceCard({ experience, onClick }: ExperienceCardProps) {
           <ProgressBar funded={experience.funded_cents} total={experience.price_cents} className="mb-3" />
         )}
 
-        {/* Urgency cue */}
         {urgency && (
-          <p className="text-xs font-medium text-coral mb-2">{urgency}</p>
+          <p className="text-[11px] font-medium text-rose italic mb-2">{urgency}</p>
         )}
 
-        {/* Sponsors */}
         {experience.sponsors.length > 0 && (
           <div className="flex items-center gap-2 mt-1">
-            <AvatarStack sponsors={experience.sponsors} />
-            <span className="text-xs text-muted-brown">
+            <AvatarStack sponsors={experience.sponsors} size={28} />
+            <span className="text-[11px] text-muted-brown">
               {experience.sponsors.length === 1
                 ? experience.sponsors[0].display_name
-                : `${experience.sponsors.length} sponsors`}
+                : `${experience.sponsors.length} gifts`}
             </span>
           </div>
         )}
 
-        {/* CTA Button */}
         {!isFullyFunded && (
           <div className="mt-4">
-            <span className="block w-full py-2.5 rounded-xl bg-gradient-to-r from-coral to-deep-coral text-white text-sm font-semibold text-center shadow-sm">
-              {isPartiallyFunded ? "Contribute" : "Gift This Experience"}
+            <span className="block w-full py-2.5 rounded-full bg-rose text-white text-sm font-medium text-center tracking-wide">
+              {isPartiallyFunded ? "Contribute" : "Gift This"}
             </span>
           </div>
         )}

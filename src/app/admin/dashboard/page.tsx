@@ -160,7 +160,7 @@ export default function AdminDashboard() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="inline-block w-8 h-8 border-4 border-sand border-t-coral rounded-full animate-spin" />
+        <div className="inline-block w-8 h-8 border-4 border-sand border-t-rose rounded-full animate-spin" />
       </div>
     );
   }
@@ -173,7 +173,7 @@ export default function AdminDashboard() {
           <h1 className="font-display font-bold text-xl text-dark-brown">
             Admin Dashboard
           </h1>
-          <a href="/" className="text-warm-brown hover:text-coral text-sm">
+          <a href="/" className="text-warm-brown hover:text-rose text-sm">
             View Registry &rarr;
           </a>
         </div>
@@ -263,14 +263,14 @@ export default function AdminDashboard() {
                 placeholder="Search experiences..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="flex-1 px-4 py-2.5 rounded-xl bg-white border-2 border-border text-dark-brown focus:border-coral focus:outline-none"
+                className="flex-1 px-4 py-2.5 rounded-xl bg-white border-2 border-border text-dark-brown focus:border-rose focus:outline-none"
               />
               <button
                 onClick={() => {
                   resetForm();
                   setShowForm(true);
                 }}
-                className="btn-primary px-6 py-2.5 rounded-xl bg-gradient-to-r from-coral to-deep-coral text-white font-semibold whitespace-nowrap"
+                className="btn-primary px-6 py-2.5 rounded-xl bg-gradient-to-r from-rose to-deep-rose text-white font-semibold whitespace-nowrap"
               >
                 + Add Experience
               </button>
@@ -296,7 +296,7 @@ export default function AdminDashboard() {
                           onClick={() => setFormEmoji(e)}
                           className={`w-10 h-10 rounded-lg flex items-center justify-center text-xl transition-all ${
                             formEmoji === e
-                              ? "bg-coral/20 border-2 border-coral"
+                              ? "bg-rose/20 border-2 border-rose"
                               : "bg-sand border-2 border-transparent hover:bg-border"
                           }`}
                         >
@@ -313,7 +313,7 @@ export default function AdminDashboard() {
                       required
                       value={formTitle}
                       onChange={(e) => setFormTitle(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl bg-white border-2 border-border text-dark-brown focus:border-coral focus:outline-none mb-3"
+                      className="w-full px-4 py-2.5 rounded-xl bg-white border-2 border-border text-dark-brown focus:border-rose focus:outline-none mb-3"
                     />
 
                     <label className="block mb-1 text-sm font-medium text-dark-brown">
@@ -324,7 +324,7 @@ export default function AdminDashboard() {
                       rows={3}
                       value={formDescription}
                       onChange={(e) => setFormDescription(e.target.value)}
-                      className="w-full px-4 py-2.5 rounded-xl bg-white border-2 border-border text-dark-brown focus:border-coral focus:outline-none mb-3 resize-none"
+                      className="w-full px-4 py-2.5 rounded-xl bg-white border-2 border-border text-dark-brown focus:border-rose focus:outline-none mb-3 resize-none"
                     />
 
                     <div className="grid grid-cols-2 gap-3 mb-3">
@@ -335,7 +335,7 @@ export default function AdminDashboard() {
                         <select
                           value={formCategory}
                           onChange={(e) => setFormCategory(e.target.value)}
-                          className="w-full px-4 py-2.5 rounded-xl bg-white border-2 border-border text-dark-brown focus:border-coral focus:outline-none"
+                          className="w-full px-4 py-2.5 rounded-xl bg-white border-2 border-border text-dark-brown focus:border-rose focus:outline-none"
                         >
                           <option value="dining">Dining</option>
                           <option value="hotels">Hotels</option>
@@ -355,7 +355,7 @@ export default function AdminDashboard() {
                           step="0.01"
                           value={formPrice}
                           onChange={(e) => setFormPrice(e.target.value)}
-                          className="w-full px-4 py-2.5 rounded-xl bg-white border-2 border-border text-dark-brown focus:border-coral focus:outline-none"
+                          className="w-full px-4 py-2.5 rounded-xl bg-white border-2 border-border text-dark-brown focus:border-rose focus:outline-none"
                         />
                       </div>
                     </div>
@@ -371,7 +371,7 @@ export default function AdminDashboard() {
                           }
                           className="sr-only peer"
                         />
-                        <div className="w-10 h-5 bg-border rounded-full peer peer-checked:bg-coral transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:after:translate-x-5" />
+                        <div className="w-10 h-5 bg-border rounded-full peer peer-checked:bg-rose transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:after:translate-x-5" />
                       </label>
                       <span className="text-sm text-dark-brown">
                         Allow Splitting
@@ -388,7 +388,7 @@ export default function AdminDashboard() {
                           min="1"
                           value={formMinSplit}
                           onChange={(e) => setFormMinSplit(e.target.value)}
-                          className="w-full px-4 py-2.5 rounded-xl bg-white border-2 border-border text-dark-brown focus:border-coral focus:outline-none"
+                          className="w-full px-4 py-2.5 rounded-xl bg-white border-2 border-border text-dark-brown focus:border-rose focus:outline-none"
                         />
                       </div>
                     )}
@@ -401,7 +401,7 @@ export default function AdminDashboard() {
                           onChange={(e) => setFormActive(e.target.checked)}
                           className="sr-only peer"
                         />
-                        <div className="w-10 h-5 bg-border rounded-full peer peer-checked:bg-coral transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:after:translate-x-5" />
+                        <div className="w-10 h-5 bg-border rounded-full peer peer-checked:bg-rose transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:after:translate-x-5" />
                       </label>
                       <span className="text-sm text-dark-brown">
                         Visible to Guests
@@ -422,7 +422,7 @@ export default function AdminDashboard() {
                       <button
                         type="submit"
                         disabled={formSaving}
-                        className="btn-primary flex-1 py-3 rounded-xl bg-gradient-to-r from-coral to-deep-coral text-white font-semibold disabled:opacity-50"
+                        className="btn-primary flex-1 py-3 rounded-xl bg-gradient-to-r from-rose to-deep-rose text-white font-semibold disabled:opacity-50"
                       >
                         {formSaving
                           ? "Saving..."
@@ -525,7 +525,7 @@ export default function AdminDashboard() {
                             <div
                               className={`w-10 h-5 rounded-full transition-colors after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all ${
                                 exp.is_active
-                                  ? "bg-coral after:translate-x-5"
+                                  ? "bg-rose after:translate-x-5"
                                   : "bg-border"
                               }`}
                             />
@@ -535,7 +535,7 @@ export default function AdminDashboard() {
                           <div className="flex items-center gap-3">
                             <button
                               onClick={() => openEditForm(exp)}
-                              className="text-sm text-coral hover:text-deep-coral font-medium"
+                              className="text-sm text-rose hover:text-deep-rose font-medium"
                             >
                               Edit
                             </button>

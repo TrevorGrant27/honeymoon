@@ -52,14 +52,14 @@ export function getCategoryEmoji(category: string): string {
 }
 
 const AVATAR_COLORS = [
-  "#E8927C",
-  "#D4785F",
-  "#5DA06A",
-  "#8B7355",
-  "#B0A08A",
-  "#7BA7C4",
-  "#C47BA7",
-  "#A7C47B",
+  "#C9918F",
+  "#B47B79",
+  "#9CAF88",
+  "#C5A572",
+  "#A89888",
+  "#8FA5B4",
+  "#B49CAF",
+  "#88AF9C",
 ];
 
 export function getAvatarColor(name: string): string {
