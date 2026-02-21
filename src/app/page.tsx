@@ -98,12 +98,6 @@ export default function HomePage() {
             Each experience below is a moment you can gift us &mdash; from
             sunset dinners to adventures we&apos;ll treasure forever.
           </p>
-          <a
-            href="#experiences"
-            className="btn-primary inline-block px-12 py-4 rounded-full bg-rose text-white font-medium text-base tracking-wider shadow-sm"
-          >
-            Explore Our Registry
-          </a>
         </div>
       </section>
 
