@@ -1,49 +1,52 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { formatCents } from "@/lib/utils";
 import type { ExperienceWithSponsors } from "@/types/database";
 
 interface CheckoutFormProps {
   experience: ExperienceWithSponsors;
+  preselectedAmountCents?: number;
 }
 
-export function CheckoutForm({ experience }: CheckoutFormProps) {
+function getContextualPresets(remainingCents: number, minSplitCents: number): number[] {
+  const presets: number[] = [];
+  for (const pct of [0.25, 0.5, 0.75]) {
+    const amt = Math.round(remainingCents * pct);
+    const rounded = Math.round(amt / 500) * 500;
+    if (rounded >= minSplitCents && rounded < remainingCents && !presets.includes(rounded)) {
+      presets.push(rounded);
+    }
+  }
+  if (!presets.includes(remainingCents)) {
+    presets.push(remainingCents);
+  }
+  return presets;
+}
+
+export function CheckoutForm({ experience, preselectedAmountCents }: CheckoutFormProps) {
   const remainingCents = experience.price_cents - experience.funded_cents;
   const allowSplit = experience.allow_splitting && remainingCents > experience.min_split_cents;
 
-  const [step, setStep] = useState<"amount" | "info">(allowSplit ? "amount" : "info");
-  const [amountCents, setAmountCents] = useState(allowSplit ? 0 : remainingCents);
+  // If amount preselected from modal, skip straight to info step
+  const hasPreselection = preselectedAmountCents && preselectedAmountCents > 0;
+  const initialAmount = hasPreselection
+    ? Math.min(preselectedAmountCents, remainingCents)
+    : allowSplit
+      ? 0
+      : remainingCents;
+
+  const [step, setStep] = useState<"amount" | "info">(
+    hasPreselection || !allowSplit ? "info" : "amount"
+  );
+  const [amountCents, setAmountCents] = useState(initialAmount);
   const [customAmount, setCustomAmount] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [note, setNote] = useState("");
-  const [photoFile, setPhotoFile] = useState<File | null>(null);
-  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Generate preset amounts
-  const presets: number[] = [];
-  if (allowSplit) {
-    for (const amt of [2500, 5000, 10000]) {
-      if (amt <= remainingCents && amt >= experience.min_split_cents) {
-        presets.push(amt);
-      }
-    }
-    if (!presets.includes(remainingCents)) {
-      presets.push(remainingCents);
-    }
-  }
-
-  function handlePhotoChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setPhotoFile(file);
-    const reader = new FileReader();
-    reader.onloadend = () => setPhotoPreview(reader.result as string);
-    reader.readAsDataURL(file);
-  }
+  const presets = allowSplit ? getContextualPresets(remainingCents, experience.min_split_cents) : [];
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -60,20 +63,6 @@ export function CheckoutForm({ experience }: CheckoutFormProps) {
     setError("");
 
     try {
-      let photoUrl: string | null = null;
-
-      // Upload photo if provided
-      if (photoFile) {
-        const formData = new FormData();
-        formData.append("file", photoFile);
-        const uploadRes = await fetch("/api/upload", { method: "POST", body: formData });
-        if (uploadRes.ok) {
-          const data = await uploadRes.json();
-          photoUrl = data.url;
-        }
-      }
-
-      // Create checkout session
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -81,7 +70,7 @@ export function CheckoutForm({ experience }: CheckoutFormProps) {
           experience_id: experience.id,
           amount_cents: amountCents,
           display_name: displayName.trim(),
-          photo_url: photoUrl,
+          photo_url: null,
           note: note.trim() || null,
         }),
       });
@@ -131,7 +120,7 @@ export function CheckoutForm({ experience }: CheckoutFormProps) {
                     : "bg-sand text-dark-brown hover:bg-border"
                 }`}
               >
-                {amt === remainingCents ? `${formatCents(amt)} (Full)` : formatCents(amt)}
+                {amt === remainingCents ? `${formatCents(amt)} (All)` : formatCents(amt)}
               </button>
             ))}
           </div>
@@ -213,38 +202,6 @@ export function CheckoutForm({ experience }: CheckoutFormProps) {
               required
               className="w-full px-4 py-3 rounded-xl bg-cream border-2 border-border text-dark-brown focus:border-coral focus:outline-none transition-colors mb-4"
             />
-
-            {/* Photo Upload */}
-            <label className="block mb-1 text-sm font-medium text-dark-brown">
-              Your Photo <span className="text-muted-brown">(optional)</span>
-            </label>
-            <div className="flex items-center gap-4 mb-4">
-              {photoPreview ? (
-                <img
-                  src={photoPreview}
-                  alt="Preview"
-                  className="w-16 h-16 rounded-full object-cover border-2 border-border"
-                />
-              ) : (
-                <div className="w-16 h-16 rounded-full bg-sand border-2 border-border flex items-center justify-center text-muted-brown text-2xl">
-                  +
-                </div>
-              )}
-              <button
-                type="button"
-                onClick={() => fileInputRef.current?.click()}
-                className="px-4 py-2 rounded-xl bg-sand text-warm-brown text-sm font-medium hover:bg-border transition-colors"
-              >
-                {photoPreview ? "Change Photo" : "Upload Photo"}
-              </button>
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*"
-                onChange={handlePhotoChange}
-                className="hidden"
-              />
-            </div>
 
             {/* Note */}
             <label className="block mb-1 text-sm font-medium text-dark-brown">

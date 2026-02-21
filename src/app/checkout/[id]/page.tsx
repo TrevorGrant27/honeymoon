@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, use } from "react";
+import { useSearchParams } from "next/navigation";
 import { CheckoutForm } from "@/components/CheckoutForm";
 import type { ExperienceWithSponsors } from "@/types/database";
 
@@ -10,6 +11,11 @@ export default function CheckoutPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = use(params);
+  const searchParams = useSearchParams();
+  const preselectedAmount = searchParams.get("amount")
+    ? parseInt(searchParams.get("amount")!, 10)
+    : undefined;
+
   const [experience, setExperience] = useState<ExperienceWithSponsors | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -73,7 +79,7 @@ export default function CheckoutPage({
       </header>
 
       <div className="max-w-4xl mx-auto px-4 py-12">
-        <CheckoutForm experience={experience} />
+        <CheckoutForm experience={experience} preselectedAmountCents={preselectedAmount} />
       </div>
     </main>
   );

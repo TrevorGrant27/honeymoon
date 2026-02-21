@@ -10,11 +10,23 @@ interface ExperienceCardProps {
   onClick: (experience: ExperienceWithSponsors) => void;
 }
 
+function getUrgencyText(experience: ExperienceWithSponsors): string | null {
+  const pct = getProgressPercentage(experience.funded_cents, experience.price_cents);
+  const isFullyFunded = experience.funded_cents >= experience.price_cents;
+  if (isFullyFunded) return null;
+
+  if (pct >= 75) return "Almost there!";
+  if (experience.sponsors.length > 0 && pct >= 50)
+    return `${experience.sponsors.length} sponsor${experience.sponsors.length > 1 ? "s" : ""} so far`;
+  return null;
+}
+
 export function ExperienceCard({ experience, onClick }: ExperienceCardProps) {
   const isFullyFunded = experience.funded_cents >= experience.price_cents;
   const isPartiallyFunded = experience.funded_cents > 0 && !isFullyFunded;
   const remainingCents = experience.price_cents - experience.funded_cents;
   const pct = getProgressPercentage(experience.funded_cents, experience.price_cents);
+  const urgency = getUrgencyText(experience);
 
   return (
     <button
@@ -79,6 +91,11 @@ export function ExperienceCard({ experience, onClick }: ExperienceCardProps) {
           <ProgressBar funded={experience.funded_cents} total={experience.price_cents} className="mb-3" />
         )}
 
+        {/* Urgency cue */}
+        {urgency && (
+          <p className="text-xs font-medium text-coral mb-2">{urgency}</p>
+        )}
+
         {/* Sponsors */}
         {experience.sponsors.length > 0 && (
           <div className="flex items-center gap-2 mt-1">
@@ -91,11 +108,11 @@ export function ExperienceCard({ experience, onClick }: ExperienceCardProps) {
           </div>
         )}
 
-        {/* CTA text */}
+        {/* CTA Button */}
         {!isFullyFunded && (
-          <div className="mt-3 text-center">
-            <span className="text-sm font-medium text-coral">
-              {isPartiallyFunded ? "Contribute" : "Sponsor This Experience"}
+          <div className="mt-4">
+            <span className="block w-full py-2.5 rounded-xl bg-gradient-to-r from-coral to-deep-coral text-white text-sm font-semibold text-center shadow-sm">
+              {isPartiallyFunded ? "Contribute" : "Gift This Experience"}
             </span>
           </div>
         )}

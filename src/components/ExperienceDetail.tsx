@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Modal } from "./Modal";
 import { ProgressBar } from "./ProgressBar";
 import { Avatar } from "./Avatar";
@@ -10,7 +11,24 @@ interface ExperienceDetailProps {
   experience: ExperienceWithSponsors | null;
   isOpen: boolean;
   onClose: () => void;
-  onSponsor: (experience: ExperienceWithSponsors) => void;
+  onSponsor: (experience: ExperienceWithSponsors, amountCents?: number) => void;
+}
+
+function getContextualPresets(remainingCents: number, minSplitCents: number): number[] {
+  const presets: number[] = [];
+  for (const pct of [0.25, 0.5, 0.75]) {
+    const amt = Math.round(remainingCents * pct);
+    // Round to nearest $5 (500 cents)
+    const rounded = Math.round(amt / 500) * 500;
+    if (rounded >= minSplitCents && rounded < remainingCents && !presets.includes(rounded)) {
+      presets.push(rounded);
+    }
+  }
+  // Always include full amount
+  if (!presets.includes(remainingCents)) {
+    presets.push(remainingCents);
+  }
+  return presets;
 }
 
 export function ExperienceDetail({
@@ -19,14 +37,34 @@ export function ExperienceDetail({
   onClose,
   onSponsor,
 }: ExperienceDetailProps) {
+  const [selectedAmount, setSelectedAmount] = useState<number>(0);
+  const [customAmount, setCustomAmount] = useState("");
+
   if (!experience) return null;
 
   const isFullyFunded = experience.funded_cents >= experience.price_cents;
   const remainingCents = Math.max(0, experience.price_cents - experience.funded_cents);
   const pct = getProgressPercentage(experience.funded_cents, experience.price_cents);
+  const allowSplit = experience.allow_splitting && remainingCents > experience.min_split_cents;
+  const presets = allowSplit ? getContextualPresets(remainingCents, experience.min_split_cents) : [remainingCents];
+
+  function handleSponsorClick() {
+    const amount = allowSplit ? selectedAmount : remainingCents;
+    if (amount > 0) {
+      onSponsor(experience!, amount);
+    } else {
+      onSponsor(experience!);
+    }
+  }
+
+  function handleClose() {
+    setSelectedAmount(0);
+    setCustomAmount("");
+    onClose();
+  }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={handleClose}>
       {/* Hero */}
       <div className="relative h-56 sm:h-72 flex items-center justify-center bg-gradient-to-br from-sand to-cream rounded-t-[28px] overflow-hidden">
         {experience.image_url ? (
@@ -75,6 +113,56 @@ export function ExperienceDetail({
           )}
         </div>
 
+        {/* Inline amount selection for splittable experiences */}
+        {!isFullyFunded && allowSplit && (
+          <div className="mb-6">
+            <h3 className="font-display font-semibold text-lg text-dark-brown mb-3">
+              Choose Your Gift Amount
+            </h3>
+            <div className="grid grid-cols-2 gap-3 mb-3">
+              {presets.map((amt) => (
+                <button
+                  key={amt}
+                  onClick={() => {
+                    setSelectedAmount(amt);
+                    setCustomAmount("");
+                  }}
+                  className={`py-3 rounded-xl font-display font-bold text-lg transition-all ${
+                    selectedAmount === amt
+                      ? "bg-coral text-white shadow-md"
+                      : "bg-sand text-dark-brown hover:bg-border"
+                  }`}
+                >
+                  {amt === remainingCents ? `${formatCents(amt)} (All)` : formatCents(amt)}
+                </button>
+              ))}
+            </div>
+            <div className="relative">
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-warm-brown font-medium">
+                $
+              </span>
+              <input
+                type="number"
+                placeholder="Custom amount"
+                value={customAmount}
+                onChange={(e) => {
+                  setCustomAmount(e.target.value);
+                  const cents = Math.round(parseFloat(e.target.value) * 100);
+                  if (cents >= experience.min_split_cents && cents <= remainingCents) {
+                    setSelectedAmount(cents);
+                  } else {
+                    setSelectedAmount(0);
+                  }
+                }}
+                className="w-full pl-8 pr-4 py-3 rounded-xl bg-cream border-2 border-border text-dark-brown focus:border-coral focus:outline-none transition-colors"
+              />
+            </div>
+            <p className="text-xs text-muted-brown mt-1.5">
+              Min {formatCents(experience.min_split_cents)}
+            </p>
+          </div>
+        )}
+
         {/* Sponsors List */}
         {experience.sponsors.length > 0 && (
           <div className="mb-6">
@@ -115,10 +203,15 @@ export function ExperienceDetail({
           </div>
         ) : (
           <button
-            onClick={() => onSponsor(experience)}
-            className="btn-primary w-full py-4 rounded-[14px] bg-gradient-to-r from-coral to-deep-coral text-white font-semibold text-lg shadow-md"
+            onClick={handleSponsorClick}
+            disabled={allowSplit && selectedAmount <= 0}
+            className="btn-primary w-full py-4 rounded-[14px] bg-gradient-to-r from-coral to-deep-coral text-white font-semibold text-lg shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Sponsor This Experience
+            {allowSplit && selectedAmount > 0
+              ? `Gift ${formatCents(selectedAmount)}`
+              : allowSplit
+                ? "Select an amount above"
+                : `Gift ${formatCents(remainingCents)}`}
           </button>
         )}
       </div>
