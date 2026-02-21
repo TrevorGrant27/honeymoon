@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { Confetti } from "@/components/Confetti";
 
 export default function ThankYouPage({
@@ -8,8 +8,15 @@ export default function ThankYouPage({
 }: {
   params: Promise<{ sessionId: string }>;
 }) {
-  use(params);
+  const { sessionId } = use(params);
   const [copied, setCopied] = useState(false);
+
+  // Verify payment and record it if the webhook hasn't already
+  useEffect(() => {
+    if (sessionId) {
+      fetch(`/api/verify-payment/${sessionId}`).catch(() => {});
+    }
+  }, [sessionId]);
 
   function handleShare() {
     const url = window.location.origin;
