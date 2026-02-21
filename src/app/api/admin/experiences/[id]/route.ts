@@ -61,10 +61,12 @@ export async function DELETE(
   const { id } = await params;
   const supabase = getServiceSupabase();
 
-  // Soft delete: just mark inactive
+  // Delete sponsors first, then the experience
+  await supabase.from("sponsors").delete().eq("experience_id", id);
+
   const { error } = await supabase
     .from("experiences")
-    .update({ is_active: false, updated_at: new Date().toISOString() })
+    .delete()
     .eq("id", id);
 
   if (error) {

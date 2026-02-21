@@ -134,6 +134,14 @@ export default function AdminDashboard() {
     setFormSaving(false);
   }
 
+  async function handleDelete(exp: ExperienceWithSponsors) {
+    if (!confirm(`Delete "${exp.title}"? This will also remove all sponsor contributions for this experience. This cannot be undone.`)) {
+      return;
+    }
+    await fetch(`/api/admin/experiences/${exp.id}`, { method: "DELETE" });
+    loadData();
+  }
+
   async function toggleActive(exp: ExperienceWithSponsors) {
     await fetch(`/api/admin/experiences/${exp.id}`, {
       method: "PUT",
@@ -524,12 +532,20 @@ export default function AdminDashboard() {
                           </button>
                         </td>
                         <td className="px-4 py-3">
-                          <button
-                            onClick={() => openEditForm(exp)}
-                            className="text-sm text-coral hover:text-deep-coral font-medium"
-                          >
-                            Edit
-                          </button>
+                          <div className="flex items-center gap-3">
+                            <button
+                              onClick={() => openEditForm(exp)}
+                              className="text-sm text-coral hover:text-deep-coral font-medium"
+                            >
+                              Edit
+                            </button>
+                            <button
+                              onClick={() => handleDelete(exp)}
+                              className="text-sm text-red-500 hover:text-red-700 font-medium"
+                            >
+                              Delete
+                            </button>
+                          </div>
                         </td>
                       </tr>
                     ))}
