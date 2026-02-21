@@ -20,17 +20,17 @@ interface CategoryFilterProps {
 export function CategoryFilter({ selected, onChange }: CategoryFilterProps) {
   return (
     <div className="relative">
-      <div className="flex gap-2 justify-center overflow-x-auto pb-2 scrollbar-hide sm:flex-wrap sm:overflow-visible">
+      <div className="flex gap-2.5 justify-center overflow-x-auto pb-2 scrollbar-hide sm:flex-wrap sm:overflow-visible">
         {CATEGORIES.map((cat) => {
           const isActive = selected === cat.value;
           return (
             <button
               key={cat.value}
               onClick={() => onChange(cat.value)}
-              className={`px-4 py-2 rounded-full text-sm transition-all whitespace-nowrap flex-shrink-0 border ${
+              className={`px-5 py-2 rounded-full text-sm transition-all whitespace-nowrap flex-shrink-0 border ${
                 isActive
-                  ? "bg-rose/10 border-rose/40 text-dark-brown font-medium"
-                  : "bg-white border-border text-warm-brown hover:border-rose/30"
+                  ? "bg-blush-wash border-petal text-dark-brown font-medium"
+                  : "bg-white border-border-soft text-warm-brown hover:border-petal/60"
               }`}
             >
               {cat.value !== "all" && (

@@ -42,7 +42,7 @@ export default function CheckoutPage({
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="inline-block w-6 h-6 border-2 border-border border-t-rose rounded-full animate-spin" />
+        <div className="inline-block w-6 h-6 border-2 border-border-soft border-t-rose rounded-full animate-spin" />
       </div>
     );
   }
@@ -51,10 +51,10 @@ export default function CheckoutPage({
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <p className="text-warm-brown text-lg mb-4">{error || "Something went wrong."}</p>
+          <p className="text-warm-brown text-lg mb-4 italic">{error || "Something went wrong."}</p>
           <a
             href="/"
-            className="btn-primary inline-block px-8 py-3 rounded-full bg-rose text-white font-medium"
+            className="btn-primary inline-block px-8 py-3 rounded-full bg-rose text-white font-medium tracking-wider"
           >
             Back to Registry
           </a>
@@ -64,19 +64,19 @@ export default function CheckoutPage({
   }
 
   return (
-    <main className="min-h-screen bg-cream">
-      <header className="border-b border-border">
+    <main className="min-h-screen bg-cream watercolor-wash">
+      <header className="relative border-b border-border-soft">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
           <a href="/" className="text-sm text-warm-brown hover:text-dark-brown transition-colors">
             &larr; Back
           </a>
-          <span className="font-display font-medium text-dark-brown text-sm">
+          <span className="font-display font-medium text-dark-brown text-sm italic">
             Trevor &amp; Carly
           </span>
         </div>
       </header>
 
-      <div className="max-w-4xl mx-auto px-4 py-12">
+      <div className="relative max-w-4xl mx-auto px-4 py-14">
         <CheckoutForm experience={experience} preselectedAmountCents={preselectedAmount} />
       </div>
     </main>

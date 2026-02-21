@@ -1,27 +1,42 @@
 @import "tailwindcss";
 
 @theme {
-  /* Warm & Romantic palette */
-  --color-cream: #FDF8F3;
-  --color-sand: #F5EEE6;
-  --color-border: #E8DED2;
-  --color-dark-brown: #3A3535;
-  --color-warm-brown: #7D6B5D;
-  --color-muted-brown: #A89888;
-  --color-rose: #C9918F;
-  --color-deep-rose: #B47B79;
-  --color-sage: #9CAF88;
-  --color-success: #9CAF88;
-  --color-gold: #C5A572;
+  /* Warm & Romantic — soft pastels, blush tones */
+  --color-ivory: #FDF9F4;
+  --color-cream: #FDF9F4;
+  --color-linen: #F5EDE4;
+  --color-sand: #F5EDE4;
+  --color-blush-wash: #FBF0EE;
+  --color-border: #E6D9CB;
+  --color-border-soft: #EDE4DA;
 
-  --font-display: "Fraunces", serif;
-  --font-body: "DM Sans", sans-serif;
+  --color-espresso: #2F2623;
+  --color-dark-brown: #2F2623;
+  --color-sienna: #7A6555;
+  --color-warm-brown: #7A6555;
+  --color-dusty: #A8957F;
+  --color-muted-brown: #A8957F;
+
+  --color-blush: #D4979A;
+  --color-rose: #D4979A;
+  --color-deep-blush: #C48589;
+  --color-deep-rose: #C48589;
+  --color-petal: #E8C4C0;
+
+  --color-sage: #8EAF8B;
+  --color-success: #8EAF8B;
+  --color-champagne: #C9AD7C;
+  --color-gold: #C9AD7C;
+  --color-lavender: #C0B4D4;
+
+  --font-display: "Playfair Display", serif;
+  --font-body: "Lora", serif;
 }
 
 body {
   font-family: var(--font-body);
-  background-color: var(--color-cream);
-  color: var(--color-dark-brown);
+  background-color: var(--color-ivory);
+  color: var(--color-espresso);
 }
 
 /* Confetti animation */
@@ -50,7 +65,21 @@ body {
 }
 
 .progress-bar-animated {
-  animation: progress-fill 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: progress-fill 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Soft float for hero decorations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.float-gentle {
+  animation: float 4s ease-in-out infinite;
 }
 
 /* Card hover effect — gentle lift */
@@ -60,8 +89,9 @@ body {
 }
 
 .experience-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 16px 40px rgba(58, 53, 53, 0.08);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(47, 38, 35, 0.06),
+    0 8px 20px rgba(212, 151, 154, 0.08);
 }
 
 /* Button hover */
@@ -71,26 +101,62 @@ body {
 
 .btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(201, 145, 143, 0.3);
+  box-shadow: 0 10px 30px rgba(212, 151, 154, 0.25);
 }
 
 /* Modal backdrop */
 .modal-overlay {
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px);
 }
 
-/* Decorative divider */
+/* Ornamental flourish divider */
 .divider-ornament {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
 }
 .divider-ornament::before,
 .divider-ornament::after {
   content: "";
   flex: 1;
   height: 1px;
-  background: var(--color-border);
+  background: linear-gradient(
+    to var(--direction, right),
+    transparent,
+    var(--color-petal),
+    transparent
+  );
+}
+.divider-ornament::before {
+  --direction: right;
+}
+.divider-ornament::after {
+  --direction: left;
+}
+
+/* Watercolor wash background */
+.watercolor-wash {
+  position: relative;
+}
+.watercolor-wash::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(212, 151, 154, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 30%, rgba(192, 180, 212, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(201, 173, 124, 0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Image shimmer for cards without photos */
+.card-placeholder {
+  background: linear-gradient(
+    135deg,
+    var(--color-linen) 0%,
+    var(--color-blush-wash) 50%,
+    var(--color-linen) 100%
+  );
 }
 
 /* Hide scrollbar for filter */
@@ -104,7 +170,7 @@ body {
 
 /* Scrollbar styling */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -117,5 +183,11 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-muted-brown);
+  background: var(--color-dusty);
+}
+
+/* Soft glow on focused inputs */
+input:focus,
+textarea:focus {
+  box-shadow: 0 0 0 3px rgba(212, 151, 154, 0.12);
 }

@@ -33,35 +33,35 @@ export function ExperienceCard({ experience, onClick }: ExperienceCardProps) {
       onClick={() => onClick(experience)}
       className={`experience-card w-full text-left rounded-2xl overflow-hidden border ${
         isFullyFunded
-          ? "border-sage/30 bg-white"
-          : "border-border bg-white"
-      } shadow-sm`}
+          ? "border-sage/25 bg-white/80"
+          : "border-border-soft bg-white"
+      }`}
     >
       {/* Image / Emoji Area */}
       <div
-        className={`relative h-44 flex items-center justify-center ${
+        className={`relative h-48 flex items-center justify-center ${
           isFullyFunded
             ? "bg-sage/5"
-            : "bg-gradient-to-br from-sand/50 to-cream"
+            : "card-placeholder"
         }`}
       >
         {experience.image_url ? (
           <img
             src={experience.image_url}
             alt={experience.title}
-            className={`w-full h-full object-cover ${isFullyFunded ? "opacity-75" : ""}`}
+            className={`w-full h-full object-cover ${isFullyFunded ? "opacity-70" : ""}`}
           />
         ) : (
           <span className="text-5xl">{experience.emoji || "✨"}</span>
         )}
 
         {isFullyFunded && (
-          <div className="absolute top-3 right-3 bg-sage/90 text-white text-[10px] font-medium tracking-wide uppercase px-3 py-1.5 rounded-full">
+          <div className="absolute top-3 right-3 bg-sage/90 text-white text-[10px] font-medium tracking-widest uppercase px-3 py-1.5 rounded-full">
             Fully Gifted
           </div>
         )}
         {isPartiallyFunded && (
-          <div className="absolute top-3 right-3 bg-white/90 text-rose text-[10px] font-medium tracking-wide uppercase px-3 py-1.5 rounded-full border border-rose/20">
+          <div className="absolute top-3 right-3 bg-white/95 text-rose text-[10px] font-medium tracking-wider uppercase px-3 py-1.5 rounded-full border border-petal/40">
             {formatCents(remainingCents)} left
           </div>
         )}
@@ -81,7 +81,7 @@ export function ExperienceCard({ experience, onClick }: ExperienceCardProps) {
             {formatCents(experience.price_cents)}
           </span>
           {(isPartiallyFunded || isFullyFunded) && (
-            <span className="text-[11px] text-muted-brown">{pct}% funded</span>
+            <span className="text-[11px] text-muted-brown italic">{pct}% funded</span>
           )}
         </div>
 
@@ -106,7 +106,7 @@ export function ExperienceCard({ experience, onClick }: ExperienceCardProps) {
 
         {!isFullyFunded && (
           <div className="mt-4">
-            <span className="block w-full py-2.5 rounded-full bg-rose text-white text-sm font-medium text-center tracking-wide">
+            <span className="block w-full py-2.5 rounded-full bg-rose text-white text-sm font-medium text-center tracking-wider">
               {isPartiallyFunded ? "Contribute" : "Gift This"}
             </span>
           </div>

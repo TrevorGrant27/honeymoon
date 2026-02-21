@@ -25,27 +25,27 @@ export default function ThankYouPage({
   }
 
   return (
-    <main className="min-h-screen bg-cream flex items-center justify-center">
+    <main className="min-h-screen bg-cream watercolor-wash flex items-center justify-center">
       <Confetti />
 
-      <div className="max-w-md mx-auto px-4 text-center">
-        <p className="divider-ornament text-muted-brown text-sm max-w-xs mx-auto mb-8">
+      <div className="relative max-w-md mx-auto px-4 text-center">
+        <p className="divider-ornament text-petal text-sm max-w-[200px] mx-auto mb-10">
           &hearts;
         </p>
-        <h1 className="font-display font-semibold text-4xl sm:text-5xl text-dark-brown mb-4">
+        <h1 className="font-display font-semibold text-4xl sm:text-5xl text-dark-brown mb-4 italic">
           Thank You
         </h1>
-        <p className="text-warm-brown text-base leading-relaxed mb-6">
+        <p className="text-warm-brown text-base leading-relaxed mb-8 italic">
           Your gift means the world to Trevor &amp; Carly.
           You&apos;re helping create an unforgettable honeymoon memory.
         </p>
 
         {/* Preview */}
-        <div className="bg-white rounded-2xl border border-border p-6 mb-5">
-          <p className="text-warm-brown text-sm mb-3">
+        <div className="bg-white rounded-2xl border border-border-soft p-6 mb-5">
+          <p className="text-warm-brown text-sm mb-3 italic">
             Your name will appear on the experience card for all to see.
           </p>
-          <div className="bg-sand/50 rounded-xl p-3 inline-flex items-center gap-3">
+          <div className="bg-blush-wash/60 rounded-xl p-3 inline-flex items-center gap-3 border border-petal/15">
             <div className="w-9 h-9 rounded-full bg-rose/15 flex items-center justify-center text-rose font-medium text-xs">
               You
             </div>
@@ -54,8 +54,8 @@ export default function ThankYouPage({
         </div>
 
         {/* Email */}
-        <div className="bg-white rounded-2xl border border-border p-5 mb-8">
-          <p className="text-muted-brown text-sm">
+        <div className="bg-white rounded-2xl border border-border-soft p-5 mb-10">
+          <p className="text-muted-brown text-sm italic">
             A confirmation has been sent to your email.
           </p>
         </div>
@@ -64,13 +64,13 @@ export default function ThankYouPage({
         <div className="flex flex-col sm:flex-row gap-3">
           <a
             href="/"
-            className="btn-primary flex-1 inline-block px-6 py-4 rounded-full bg-rose text-white font-medium text-base tracking-wide shadow-sm text-center"
+            className="btn-primary flex-1 inline-block px-6 py-4 rounded-full bg-rose text-white font-medium text-base tracking-wider shadow-sm text-center"
           >
             Gift Another
           </a>
           <button
             onClick={handleShare}
-            className="flex-1 px-6 py-4 rounded-full bg-white border border-border text-dark-brown font-medium text-base hover:bg-sand transition-colors text-center"
+            className="flex-1 px-6 py-4 rounded-full bg-white border border-border-soft text-dark-brown font-medium text-base hover:bg-linen transition-colors text-center"
           >
             {copied ? "Copied!" : "Share Registry"}
           </button>

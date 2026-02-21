@@ -22,12 +22,12 @@ export function ProgressBar({
   const effectiveVariant = isComplete ? "sage" : variant;
 
   return (
-    <div className={`h-1.5 w-full rounded-full bg-border/60 ${className}`}>
+    <div className={`h-1.5 w-full rounded-full bg-border-soft ${className}`}>
       <div
         className={`h-full rounded-full ${animated ? "progress-bar-animated" : ""} ${
           effectiveVariant === "sage"
-            ? "bg-gradient-to-r from-sage to-sage/70"
-            : "bg-gradient-to-r from-rose to-deep-rose"
+            ? "bg-gradient-to-r from-sage to-sage/60"
+            : "bg-gradient-to-r from-petal via-rose to-deep-rose"
         }`}
         style={{ width: `${pct}%` }}
       />
