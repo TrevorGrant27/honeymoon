@@ -2,6 +2,10 @@ import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 
 export async function GET() {
+  if (!supabase) {
+    return NextResponse.json({ error: "Database not configured" }, { status: 500 });
+  }
+
   const { data: experiences, error: expError } = await supabase
     .from("experiences")
     .select("*")
