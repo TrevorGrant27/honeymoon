@@ -8,6 +8,9 @@ export async function GET() {
   }
 
   const supabase = getServiceSupabase();
+  if (!supabase) {
+    return NextResponse.json({ error: "Database not configured" }, { status: 500 });
+  }
 
   const { data: experiences } = await supabase.from("experiences").select("*");
   const { data: sponsors } = await supabase.from("sponsors").select("*");

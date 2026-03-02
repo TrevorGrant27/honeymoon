@@ -65,9 +65,18 @@ export default function AdminDashboard() {
         return;
       }
 
-      setStats(await statsRes.json());
-      setExperiences(await expRes.json());
-      setSponsors(await sponRes.json());
+      if (statsRes.ok) {
+        const statsData = await statsRes.json();
+        if (statsData && !statsData.error) setStats(statsData);
+      }
+      if (expRes.ok) {
+        const expData = await expRes.json();
+        if (Array.isArray(expData)) setExperiences(expData);
+      }
+      if (sponRes.ok) {
+        const sponData = await sponRes.json();
+        if (Array.isArray(sponData)) setSponsors(sponData);
+      }
     } catch {
       console.error("Failed to load admin data");
     } finally {

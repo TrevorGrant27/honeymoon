@@ -8,6 +8,9 @@ export async function GET() {
   }
 
   const supabase = getServiceSupabase();
+  if (!supabase) {
+    return NextResponse.json({ error: "Database not configured" }, { status: 500 });
+  }
 
   const { data: experiences, error: expError } = await supabase
     .from("experiences")
@@ -43,6 +46,9 @@ export async function POST(request: Request) {
 
   const body = await request.json();
   const supabase = getServiceSupabase();
+  if (!supabase) {
+    return NextResponse.json({ error: "Database not configured" }, { status: 500 });
+  }
 
   // Get max display_order
   const { data: maxOrder } = await supabase
