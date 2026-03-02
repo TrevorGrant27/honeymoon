@@ -47,6 +47,7 @@ export default function AdminDashboard() {
   const [formMinSplit, setFormMinSplit] = useState("25");
   const [formActive, setFormActive] = useState(true);
   const [formSaving, setFormSaving] = useState(false);
+  const [formError, setFormError] = useState("");
 
   useEffect(() => {
     loadData();
@@ -94,6 +95,7 @@ export default function AdminDashboard() {
     setFormMinSplit("25");
     setFormActive(true);
     setEditingId(null);
+    setFormError("");
   }
 
   function openEditForm(exp: ExperienceWithSponsors) {
@@ -112,6 +114,7 @@ export default function AdminDashboard() {
   async function handleFormSubmit(e: React.FormEvent) {
     e.preventDefault();
     setFormSaving(true);
+    setFormError("");
 
     const payload = {
       title: formTitle,
@@ -129,16 +132,23 @@ export default function AdminDashboard() {
       : "/api/admin/experiences";
     const method = editingId ? "PUT" : "POST";
 
-    const res = await fetch(url, {
-      method,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+    try {
+      const res = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-    if (res.ok) {
-      setShowForm(false);
-      resetForm();
-      loadData();
+      if (res.ok) {
+        setShowForm(false);
+        resetForm();
+        loadData();
+      } else {
+        const data = await res.json().catch(() => null);
+        setFormError(data?.error || "Failed to save experience. Please try again.");
+      }
+    } catch {
+      setFormError("Network error. Please try again.");
     }
     setFormSaving(false);
   }
@@ -413,6 +423,10 @@ export default function AdminDashboard() {
                         Visible to Guests
                       </span>
                     </div>
+
+                    {formError && (
+                      <p className="text-red-600 text-sm text-center mb-3">{formError}</p>
+                    )}
 
                     <div className="flex gap-3">
                       <button

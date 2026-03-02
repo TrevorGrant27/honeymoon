@@ -51,14 +51,13 @@ export async function POST(request: Request) {
   }
 
   // Get max display_order
-  const { data: maxOrder } = await supabase
+  const { data: orders } = await supabase
     .from("experiences")
     .select("display_order")
     .order("display_order", { ascending: false })
-    .limit(1)
-    .single();
+    .limit(1);
 
-  const newOrder = (maxOrder?.display_order || 0) + 1;
+  const newOrder = (orders && orders.length > 0 ? orders[0].display_order : 0) + 1;
 
   const { data, error } = await supabase
     .from("experiences")
