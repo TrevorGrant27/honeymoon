@@ -20,13 +20,11 @@ export default function HomePage() {
   useEffect(() => {
     fetch("/api/experiences")
       .then((res) => {
-        if (!res.ok) throw new Error("Failed to load");
+        if (!res.ok) throw new Error("Failed to load experiences");
         return res.json();
       })
       .then((data) => {
-        if (Array.isArray(data)) {
-          setExperiences(data);
-        }
+        setExperiences(Array.isArray(data) ? data : []);
         setLoading(false);
       })
       .catch(() => setLoading(false));
