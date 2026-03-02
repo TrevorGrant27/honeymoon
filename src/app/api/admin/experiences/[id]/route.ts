@@ -17,40 +17,47 @@ export async function PUT(
     return NextResponse.json({ error: "Database not configured" }, { status: 500 });
   }
 
-  const updates: Record<string, unknown> = {};
-  const allowedFields = [
-    "title",
-    "description",
-    "category",
-    "price_cents",
-    "image_url",
-    "emoji",
-    "allow_splitting",
-    "min_split_cents",
-    "display_order",
-    "is_active",
-  ];
+  try {
+    const updates: Record<string, unknown> = {};
+    const allowedFields = [
+      "title",
+      "description",
+      "category",
+      "price_cents",
+      "image_url",
+      "emoji",
+      "allow_splitting",
+      "min_split_cents",
+      "display_order",
+      "is_active",
+    ];
 
-  for (const field of allowedFields) {
-    if (body[field] !== undefined) {
-      updates[field] = body[field];
+    for (const field of allowedFields) {
+      if (body[field] !== undefined) {
+        updates[field] = body[field];
+      }
     }
+
+    updates.updated_at = new Date().toISOString();
+
+    const { data, error } = await supabase
+      .from("experiences")
+      .update(updates)
+      .eq("id", id)
+      .select()
+      .single();
+
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json(data);
+  } catch (err) {
+    return NextResponse.json(
+      { error: err instanceof Error ? err.message : "Failed to connect to database" },
+      { status: 500 }
+    );
   }
-
-  updates.updated_at = new Date().toISOString();
-
-  const { data, error } = await supabase
-    .from("experiences")
-    .update(updates)
-    .eq("id", id)
-    .select()
-    .single();
-
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
-  }
-
-  return NextResponse.json(data);
 }
 
 export async function DELETE(
@@ -67,17 +74,24 @@ export async function DELETE(
     return NextResponse.json({ error: "Database not configured" }, { status: 500 });
   }
 
-  // Delete sponsors first, then the experience
-  await supabase.from("sponsors").delete().eq("experience_id", id);
+  try {
+    // Delete sponsors first, then the experience
+    await supabase.from("sponsors").delete().eq("experience_id", id);
 
-  const { error } = await supabase
-    .from("experiences")
-    .delete()
-    .eq("id", id);
+    const { error } = await supabase
+      .from("experiences")
+      .delete()
+      .eq("id", id);
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ success: true });
+  } catch (err) {
+    return NextResponse.json(
+      { error: err instanceof Error ? err.message : "Failed to connect to database" },
+      { status: 500 }
+    );
   }
-
-  return NextResponse.json({ success: true });
 }
