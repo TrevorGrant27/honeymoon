@@ -8,6 +8,9 @@ export async function GET() {
   }
 
   const supabase = getServiceSupabase();
+  if (!supabase) {
+    return NextResponse.json({ error: "Database not configured" }, { status: 500 });
+  }
 
   const { data: sponsors, error: sponError } = await supabase
     .from("sponsors")

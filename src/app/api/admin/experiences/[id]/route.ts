@@ -13,6 +13,9 @@ export async function PUT(
   const { id } = await params;
   const body = await request.json();
   const supabase = getServiceSupabase();
+  if (!supabase) {
+    return NextResponse.json({ error: "Database not configured" }, { status: 500 });
+  }
 
   const updates: Record<string, unknown> = {};
   const allowedFields = [
@@ -60,6 +63,9 @@ export async function DELETE(
 
   const { id } = await params;
   const supabase = getServiceSupabase();
+  if (!supabase) {
+    return NextResponse.json({ error: "Database not configured" }, { status: 500 });
+  }
 
   // Delete sponsors first, then the experience
   await supabase.from("sponsors").delete().eq("experience_id", id);
