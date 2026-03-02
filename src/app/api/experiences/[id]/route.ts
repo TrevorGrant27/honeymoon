@@ -7,6 +7,10 @@ export async function GET(
 ) {
   const { id } = await params;
 
+  if (!supabase) {
+    return NextResponse.json({ error: "Database not configured" }, { status: 500 });
+  }
+
   const { data: experience, error: expError } = await supabase
     .from("experiences")
     .select("*")
