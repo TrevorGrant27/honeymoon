@@ -54,7 +54,7 @@ export default function CheckoutPage({
           <p className="text-warm-brown text-lg mb-4 italic">{error || "Something went wrong."}</p>
           <a
             href="/"
-            className="btn-primary inline-block px-8 py-3 rounded-full bg-rose text-white font-medium tracking-wider"
+            className="btn-primary inline-block px-8 py-3 rounded-full bg-gradient-to-r from-rose to-deep-rose text-white font-medium tracking-wider"
           >
             Back to Registry
           </a>

@@ -15,7 +15,7 @@ function getUrgencyText(experience: ExperienceWithSponsors): string | null {
   const isFullyFunded = experience.funded_cents >= experience.price_cents;
   if (isFullyFunded) return null;
 
-  if (pct >= 75) return "Almost there";
+  if (pct >= 75) return "Presque! Almost there";
   if (experience.sponsors.length > 0 && pct >= 50)
     return `${experience.sponsors.length} gift${experience.sponsors.length > 1 ? "s" : ""} so far`;
   return null;
@@ -33,13 +33,13 @@ export function ExperienceCard({ experience, onClick }: ExperienceCardProps) {
       onClick={() => onClick(experience)}
       className={`experience-card w-full text-left rounded-2xl overflow-hidden border ${
         isFullyFunded
-          ? "border-sage/25 bg-white/80"
+          ? "border-sage/30 bg-white/80"
           : "border-border-soft bg-white"
       }`}
     >
       {/* Image / Emoji Area */}
       <div
-        className={`relative h-48 flex items-center justify-center ${
+        className={`relative h-52 flex items-center justify-center ${
           isFullyFunded
             ? "bg-sage/5"
             : "card-placeholder"
@@ -49,19 +49,19 @@ export function ExperienceCard({ experience, onClick }: ExperienceCardProps) {
           <img
             src={experience.image_url}
             alt={experience.title}
-            className={`w-full h-full object-cover ${isFullyFunded ? "opacity-70" : ""}`}
+            className={`w-full h-full object-cover ${isFullyFunded ? "opacity-60 saturate-[0.7]" : ""}`}
           />
         ) : (
-          <span className="text-5xl">{experience.emoji || "✨"}</span>
+          <span className={`text-5xl ${isFullyFunded ? "opacity-50" : ""}`}>{experience.emoji || "✨"}</span>
         )}
 
         {isFullyFunded && (
-          <div className="absolute top-3 right-3 bg-sage/90 text-white text-[10px] font-medium tracking-widest uppercase px-3 py-1.5 rounded-full">
+          <div className="absolute top-3 right-3 bg-sage/90 backdrop-blur-sm text-white text-[10px] font-medium tracking-widest uppercase px-3 py-1.5 rounded-full">
             Fully Gifted
           </div>
         )}
         {isPartiallyFunded && (
-          <div className="absolute top-3 right-3 bg-white/95 text-rose text-[10px] font-medium tracking-wider uppercase px-3 py-1.5 rounded-full border border-petal/40">
+          <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-sm text-rose text-[10px] font-semibold tracking-wider uppercase px-3 py-1.5 rounded-full border border-petal/50 shadow-sm">
             {formatCents(remainingCents)} left
           </div>
         )}
@@ -90,7 +90,7 @@ export function ExperienceCard({ experience, onClick }: ExperienceCardProps) {
         )}
 
         {urgency && (
-          <p className="text-[11px] font-medium text-rose italic mb-2">{urgency}</p>
+          <p className="text-[11px] font-medium text-champagne italic mb-2">{urgency}</p>
         )}
 
         {experience.sponsors.length > 0 && (
@@ -106,7 +106,7 @@ export function ExperienceCard({ experience, onClick }: ExperienceCardProps) {
 
         {!isFullyFunded && (
           <div className="mt-4">
-            <span className="block w-full py-2.5 rounded-full bg-rose text-white text-sm font-medium text-center tracking-wider">
+            <span className="block w-full py-2.5 rounded-full bg-gradient-to-r from-rose to-deep-rose text-white text-sm font-medium text-center tracking-wider shadow-sm">
               {isPartiallyFunded ? "Contribute" : "Gift This"}
             </span>
           </div>

@@ -1,33 +1,47 @@
 @import "tailwindcss";
 
 @theme {
-  /* South of France — sun-drenched warmth, lavender & Mediterranean tones */
-  --color-ivory: #FDFAF5;
-  --color-cream: #FDFAF5;
-  --color-linen: #F3EDE3;
-  --color-sand: #F3EDE3;
-  --color-blush-wash: #F0F1F7;
-  --color-border: #D9D3C7;
-  --color-border-soft: #E6E0D6;
+  /* South of France — warm stone, golden light, Mediterranean coast, lavender fields */
 
-  --color-espresso: #2A2520;
-  --color-dark-brown: #2A2520;
-  --color-sienna: #6B5D4F;
-  --color-warm-brown: #6B5D4F;
-  --color-dusty: #9E8E7A;
-  --color-muted-brown: #9E8E7A;
+  /* Backgrounds — warm limestone & sun-bleached stone */
+  --color-ivory: #FAF7F2;
+  --color-cream: #FAF7F2;
+  --color-linen: #F0EAE0;
+  --color-sand: #E8DFD2;
+  --color-blush-wash: #EEF3F7;
+  --color-border: #D5CABB;
+  --color-border-soft: #E3DAD0;
 
-  --color-blush: #9B7DB8;
-  --color-rose: #9B7DB8;
-  --color-deep-blush: #8568A6;
-  --color-deep-rose: #8568A6;
-  --color-petal: #C9B8DA;
+  /* Text — warm charcoal with golden undertones */
+  --color-espresso: #2C2418;
+  --color-dark-brown: #2C2418;
+  --color-sienna: #5C4D3C;
+  --color-warm-brown: #5C4D3C;
+  --color-dusty: #8A7B6B;
+  --color-muted-brown: #8A7B6B;
 
-  --color-sage: #7EA87E;
-  --color-success: #7EA87E;
-  --color-champagne: #D4A853;
-  --color-gold: #D4A853;
-  --color-lavender: #B8A9D4;
+  /* Primary — warm terracotta (sun-baked clay) */
+  --color-blush: #C17B5A;
+  --color-rose: #C17B5A;
+  --color-deep-blush: #A8654A;
+  --color-deep-rose: #A8654A;
+  --color-petal: #DBBBA6;
+
+  /* Accent — Mediterranean blue */
+  --color-azure: #4A7FA5;
+  --color-azure-soft: #6B9BBD;
+
+  /* Success — olive green */
+  --color-sage: #7A9A6D;
+  --color-success: #7A9A6D;
+
+  /* Gold — Provençal sunlight */
+  --color-champagne: #D4A24E;
+  --color-gold: #D4A24E;
+
+  /* Lavender — fields of Provence */
+  --color-lavender: #9B89B5;
+  --color-lavender-soft: #C4B8D6;
 
   --font-display: "Playfair Display", serif;
   --font-body: "Lora", serif;
@@ -82,26 +96,37 @@ body {
   animation: float 4s ease-in-out infinite;
 }
 
-/* Card hover effect — gentle lift */
+/* Shimmer for loading states */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Card hover effect — warm lift with golden shadow */
 .experience-card {
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
     box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .experience-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 50px rgba(42, 37, 32, 0.06),
-    0 8px 20px rgba(155, 125, 184, 0.08);
+  transform: translateY(-6px);
+  box-shadow:
+    0 24px 50px rgba(44, 36, 24, 0.08),
+    0 8px 24px rgba(193, 123, 90, 0.10);
 }
 
-/* Button hover */
+/* Button hover — warm terracotta glow */
 .btn-primary {
   transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 }
 
 .btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 10px 30px rgba(155, 125, 184, 0.25);
+  box-shadow: 0 12px 32px rgba(193, 123, 90, 0.30);
 }
 
 /* Modal backdrop */
@@ -109,7 +134,7 @@ body {
   backdrop-filter: blur(12px);
 }
 
-/* Ornamental flourish divider */
+/* Ornamental flourish divider — golden warm */
 .divider-ornament {
   display: flex;
   align-items: center;
@@ -123,7 +148,7 @@ body {
   background: linear-gradient(
     to var(--direction, right),
     transparent,
-    var(--color-petal),
+    var(--color-champagne),
     transparent
   );
 }
@@ -134,7 +159,7 @@ body {
   --direction: left;
 }
 
-/* Watercolor wash background */
+/* Provençal watercolor wash — golden light with lavender mist */
 .watercolor-wash {
   position: relative;
 }
@@ -143,20 +168,30 @@ body {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 20% 50%, rgba(155, 125, 184, 0.06) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 30%, rgba(184, 169, 212, 0.05) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 80%, rgba(212, 168, 83, 0.04) 0%, transparent 50%);
+    radial-gradient(ellipse at 15% 40%, rgba(212, 162, 78, 0.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 25%, rgba(155, 137, 181, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 85%, rgba(193, 123, 90, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 65%, rgba(74, 127, 165, 0.03) 0%, transparent 45%);
   pointer-events: none;
 }
 
-/* Image shimmer for cards without photos */
+/* Hero-specific warm gradient */
+.hero-provence {
+  background:
+    linear-gradient(175deg, #F5EFE5 0%, #FAF7F2 35%, #EEF3F7 65%, #FAF7F2 100%);
+}
+
+/* Image shimmer — warm stone tones */
 .card-placeholder {
   background: linear-gradient(
     135deg,
-    var(--color-linen) 0%,
-    var(--color-blush-wash) 50%,
-    var(--color-linen) 100%
+    #F0EAE0 0%,
+    #F5EFE5 35%,
+    #EEF3F7 65%,
+    #F0EAE0 100%
   );
+  background-size: 200% 100%;
+  animation: shimmer 8s ease-in-out infinite;
 }
 
 /* Hide scrollbar for filter */
@@ -186,8 +221,8 @@ body {
   background: var(--color-dusty);
 }
 
-/* Soft glow on focused inputs */
+/* Warm glow on focused inputs */
 input:focus,
 textarea:focus {
-  box-shadow: 0 0 0 3px rgba(155, 125, 184, 0.12);
+  box-shadow: 0 0 0 3px rgba(193, 123, 90, 0.12);
 }

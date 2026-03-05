@@ -82,43 +82,51 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden watercolor-wash">
-        <div className="absolute inset-0 bg-gradient-to-b from-linen/80 via-blush-wash/40 to-cream" />
-        <div className="relative max-w-3xl mx-auto px-4 pt-24 pb-20 sm:pt-32 sm:pb-24 text-center">
-          <p className="font-display italic text-warm-brown text-lg sm:text-xl mb-4 tracking-widest">
-            The Honeymoon of
+      {/* Hero — Provençal golden light */}
+      <section className="relative overflow-hidden hero-provence">
+        <div className="absolute inset-0 watercolor-wash" />
+
+        {/* Decorative accent lines */}
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-champagne/40 to-transparent" />
+
+        <div className="relative max-w-3xl mx-auto px-4 pt-28 pb-24 sm:pt-36 sm:pb-28 text-center">
+          <p className="text-muted-brown text-xs sm:text-sm mb-6 tracking-[0.35em] uppercase">
+            A Honeymoon Registry
           </p>
-          <h1 className="font-display font-bold text-5xl sm:text-7xl lg:text-8xl text-dark-brown mb-3 leading-[1.05] italic">
+          <h1 className="font-display font-bold text-5xl sm:text-7xl lg:text-8xl text-dark-brown mb-4 leading-[1.05] italic">
             Trevor &amp; Carly
           </h1>
-          <p className="divider-ornament text-petal text-sm max-w-[200px] mx-auto my-8">
-            &#x2766;
+          <div className="divider-ornament text-champagne text-sm max-w-[200px] mx-auto my-8">
+            <span className="text-lavender">&#x269C;</span>
+          </div>
+          <p className="text-warm-brown text-base sm:text-lg max-w-md mx-auto mb-4 leading-relaxed italic">
+            Help us create unforgettable memories in the South of France
           </p>
-          <p className="text-warm-brown text-base sm:text-lg max-w-lg mx-auto mb-12 leading-relaxed italic">
-            Help us create unforgettable memories in the South of France.
-            Each experience below is a moment you can gift us &mdash; from
-            lavender fields in Provence to sunset dinners along the C&ocirc;te d&apos;Azur.
+          <p className="text-muted-brown text-sm max-w-sm mx-auto leading-relaxed">
+            From lazy mornings on the Riviera to sunset ros&eacute; in Provence &mdash;
+            each experience below is a moment you can gift us.
           </p>
         </div>
+
+        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
       </section>
 
-      {/* Stats Bar — only shown once gifts exist */}
+      {/* Stats Bar */}
       {hasGifts && (
-        <section className="border-y border-border-soft">
+        <section className="bg-linen/60 border-b border-border-soft">
           <div className="max-w-3xl mx-auto px-4 py-7">
             <div className="grid grid-cols-3 gap-4 text-center mb-4">
               <div>
                 <span className="font-display font-semibold text-2xl sm:text-3xl text-dark-brown">
                   {formatCents(stats.totalRaised)}
                 </span>
-                <p className="text-[11px] text-muted-brown mt-1.5 tracking-widest uppercase">Raised</p>
+                <p className="text-[11px] text-muted-brown mt-1.5 tracking-[0.2em] uppercase">Raised</p>
               </div>
               <div>
                 <span className="font-display font-semibold text-2xl sm:text-3xl text-dark-brown">
                   {stats.sponsorCount}
                 </span>
-                <p className="text-[11px] text-muted-brown mt-1.5 tracking-widest uppercase">Gifts</p>
+                <p className="text-[11px] text-muted-brown mt-1.5 tracking-[0.2em] uppercase">Gifts</p>
               </div>
               <div>
                 <span className="font-display font-semibold text-2xl sm:text-3xl text-dark-brown">
@@ -127,7 +135,7 @@ export default function HomePage() {
                     : 0}
                   %
                 </span>
-                <p className="text-[11px] text-muted-brown mt-1.5 tracking-widest uppercase">Funded</p>
+                <p className="text-[11px] text-muted-brown mt-1.5 tracking-[0.2em] uppercase">Funded</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
@@ -145,7 +153,7 @@ export default function HomePage() {
       )}
 
       {/* Experience Grid */}
-      <section id="experiences" className="max-w-5xl mx-auto px-4 py-16">
+      <section id="experiences" className="max-w-5xl mx-auto px-4 py-16 sm:py-20">
         <h2 className="font-display font-semibold text-2xl sm:text-3xl text-dark-brown text-center mb-2 italic">
           Our Experiences
         </h2>
@@ -202,16 +210,19 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="text-center py-12">
-        <div className="divider-ornament text-petal text-sm max-w-[120px] mx-auto mb-6">
-          &#x2766;
+      <footer className="text-center py-14 bg-linen/40">
+        <div className="divider-ornament text-champagne text-sm max-w-[120px] mx-auto mb-6">
+          <span className="text-lavender">&#x269C;</span>
         </div>
-        <p className="font-display italic text-muted-brown text-sm">
-          Made with love for Trevor &amp; Carly&apos;s South of France adventure
+        <p className="font-display italic text-muted-brown text-sm mb-1">
+          With love from the South of France
+        </p>
+        <p className="text-muted-brown/60 text-xs">
+          Trevor &amp; Carly&apos;s Honeymoon
         </p>
         <a
           href="/admin"
-          className="inline-block mt-3 text-[11px] text-muted-brown/30 hover:text-warm-brown transition-colors"
+          className="inline-block mt-4 text-[11px] text-muted-brown/20 hover:text-warm-brown transition-colors"
         >
           Admin
         </a>

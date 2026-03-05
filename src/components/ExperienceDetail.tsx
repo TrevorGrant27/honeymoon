@@ -78,7 +78,7 @@ export function ExperienceDetail({
 
       <div className="p-6 sm:p-8">
         {/* Category */}
-        <span className="inline-block text-[10px] font-medium tracking-widest uppercase text-muted-brown bg-blush-wash px-3.5 py-1.5 rounded-full mb-4 border border-petal/20">
+        <span className="inline-block text-[10px] font-medium tracking-widest uppercase text-muted-brown bg-linen px-3.5 py-1.5 rounded-full mb-4 border border-border-soft">
           {getCategoryLabel(experience.category)}
         </span>
 
@@ -88,7 +88,7 @@ export function ExperienceDetail({
         <p className="text-warm-brown leading-relaxed mb-6">{experience.description}</p>
 
         {/* Price & Progress */}
-        <div className="bg-blush-wash/50 rounded-xl p-5 mb-6 border border-petal/20">
+        <div className="bg-linen/60 rounded-xl p-5 mb-6 border border-border-soft">
           <div className="flex items-center justify-between mb-3">
             <div>
               <span className="font-display font-semibold text-xl text-dark-brown">
@@ -126,7 +126,7 @@ export function ExperienceDetail({
                   }}
                   className={`py-3 rounded-xl font-display font-semibold text-base transition-all border ${
                     selectedAmount === amt
-                      ? "bg-rose text-white border-rose shadow-sm"
+                      ? "bg-gradient-to-r from-rose to-deep-rose text-white border-rose shadow-sm"
                       : "bg-white text-dark-brown border-border-soft hover:border-petal"
                   }`}
                 >
@@ -192,7 +192,7 @@ export function ExperienceDetail({
         {isFullyFunded ? (
           <div className="text-center py-5 bg-sage/8 rounded-xl border border-sage/15">
             <span className="text-sage font-display font-semibold text-base italic">
-              Fully Gifted
+              Fully Gifted &mdash; Merci!
             </span>
             <p className="text-xs text-warm-brown mt-1 italic">
               Thank you to everyone who contributed!
@@ -202,7 +202,7 @@ export function ExperienceDetail({
           <button
             onClick={handleSponsorClick}
             disabled={allowSplit && selectedAmount <= 0}
-            className="btn-primary w-full py-4 rounded-full bg-rose text-white font-medium text-base tracking-wider shadow-sm disabled:opacity-40 disabled:cursor-not-allowed"
+            className="btn-primary w-full py-4 rounded-full bg-gradient-to-r from-rose to-deep-rose text-white font-medium text-base tracking-wider shadow-sm disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {allowSplit && selectedAmount > 0
               ? `Gift ${formatCents(selectedAmount)}`
