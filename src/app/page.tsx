@@ -101,8 +101,7 @@ export default function HomePage() {
           </div>
           <p className="text-warm-brown text-base sm:text-lg max-w-lg mx-auto leading-relaxed italic">
             Help us create unforgettable memories on our honeymoon.
-            Each experience below is a moment you can gift us &mdash; from
-            sunset dinners to adventures we&apos;ll treasure forever.
+            Each experience below is a moment you can gift us.
           </p>
         </div>
 
