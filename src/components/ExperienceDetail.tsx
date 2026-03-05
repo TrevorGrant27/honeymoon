@@ -78,7 +78,7 @@ export function ExperienceDetail({
 
       <div className="p-6 sm:p-8">
         {/* Category */}
-        <span className="inline-block text-[10px] font-medium tracking-widest uppercase text-muted-brown bg-blush-wash px-3.5 py-1.5 rounded-full mb-4 border border-petal/20">
+        <span className="inline-block text-[10px] font-medium tracking-widest uppercase text-muted-brown bg-linen px-3.5 py-1.5 rounded-full mb-4 border border-border-soft">
           {getCategoryLabel(experience.category)}
         </span>
 
@@ -88,7 +88,7 @@ export function ExperienceDetail({
         <p className="text-warm-brown leading-relaxed mb-6">{experience.description}</p>
 
         {/* Price & Progress */}
-        <div className="bg-blush-wash/50 rounded-xl p-5 mb-6 border border-petal/20">
+        <div className="bg-linen/60 rounded-xl p-5 mb-6 border border-border-soft">
           <div className="flex items-center justify-between mb-3">
             <div>
               <span className="font-display font-semibold text-xl text-dark-brown">
@@ -126,7 +126,7 @@ export function ExperienceDetail({
                   }}
                   className={`py-3 rounded-xl font-display font-semibold text-base transition-all border ${
                     selectedAmount === amt
-                      ? "bg-rose text-white border-rose shadow-sm"
+                      ? "bg-gradient-to-r from-rose to-deep-rose text-white border-rose shadow-sm"
                       : "bg-white text-dark-brown border-border-soft hover:border-petal"
                   }`}
                 >
@@ -154,9 +154,6 @@ export function ExperienceDetail({
                 className="w-full pl-8 pr-4 py-3 rounded-xl bg-white border border-border-soft text-dark-brown focus:border-rose focus:outline-none transition-colors"
               />
             </div>
-            <p className="text-[11px] text-muted-brown mt-1.5 italic">
-              Min {formatCents(experience.min_split_cents)}
-            </p>
           </div>
         )}
 
@@ -202,7 +199,7 @@ export function ExperienceDetail({
           <button
             onClick={handleSponsorClick}
             disabled={allowSplit && selectedAmount <= 0}
-            className="btn-primary w-full py-4 rounded-full bg-rose text-white font-medium text-base tracking-wider shadow-sm disabled:opacity-40 disabled:cursor-not-allowed"
+            className="btn-primary w-full py-4 rounded-full bg-gradient-to-r from-rose to-deep-rose text-white font-medium text-base tracking-wider shadow-sm disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {allowSplit && selectedAmount > 0
               ? `Gift ${formatCents(selectedAmount)}`

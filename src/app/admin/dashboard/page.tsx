@@ -44,7 +44,8 @@ export default function AdminDashboard() {
   const [formPrice, setFormPrice] = useState("");
   const [formEmoji, setFormEmoji] = useState("✨");
   const [formAllowSplitting, setFormAllowSplitting] = useState(true);
-  const [formMinSplit, setFormMinSplit] = useState("25");
+  const [formMinSplit, setFormMinSplit] = useState("50");
+  const [formImageUrl, setFormImageUrl] = useState("");
   const [formActive, setFormActive] = useState(true);
   const [formSaving, setFormSaving] = useState(false);
   const [formError, setFormError] = useState("");
@@ -91,8 +92,9 @@ export default function AdminDashboard() {
     setFormCategory("dining");
     setFormPrice("");
     setFormEmoji("✨");
+    setFormImageUrl("");
     setFormAllowSplitting(true);
-    setFormMinSplit("25");
+    setFormMinSplit("50");
     setFormActive(true);
     setEditingId(null);
     setFormError("");
@@ -104,6 +106,7 @@ export default function AdminDashboard() {
     setFormCategory(exp.category);
     setFormPrice((exp.price_cents / 100).toString());
     setFormEmoji(exp.emoji);
+    setFormImageUrl(exp.image_url || "");
     setFormAllowSplitting(exp.allow_splitting);
     setFormMinSplit((exp.min_split_cents / 100).toString());
     setFormActive(exp.is_active);
@@ -122,6 +125,7 @@ export default function AdminDashboard() {
       category: formCategory,
       price_cents: Math.round(parseFloat(formPrice) * 100),
       emoji: formEmoji,
+      image_url: formImageUrl.trim() || null,
       allow_splitting: formAllowSplitting,
       min_split_cents: Math.round(parseFloat(formMinSplit) * 100),
       is_active: formActive,
@@ -320,6 +324,29 @@ export default function AdminDashboard() {
                         </button>
                       ))}
                     </div>
+
+                    <label className="block mb-1 text-sm font-medium text-dark-brown">
+                      Image URL <span className="text-muted-brown italic font-normal">(optional — overrides icon)</span>
+                    </label>
+                    <input
+                      type="url"
+                      placeholder="https://example.com/image.jpg"
+                      value={formImageUrl}
+                      onChange={(e) => setFormImageUrl(e.target.value)}
+                      className="w-full px-4 py-2.5 rounded-xl bg-white border-2 border-border text-dark-brown focus:border-rose focus:outline-none mb-3"
+                    />
+                    {formImageUrl && (
+                      <div className="mb-3 rounded-xl overflow-hidden border-2 border-border h-32">
+                        <img
+                          src={formImageUrl}
+                          alt="Preview"
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).style.display = 'none';
+                          }}
+                        />
+                      </div>
+                    )}
 
                     <label className="block mb-1 text-sm font-medium text-dark-brown">
                       Title *

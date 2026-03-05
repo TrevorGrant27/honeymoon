@@ -69,7 +69,7 @@ export async function POST(request: Request) {
       image_url: body.image_url || null,
       emoji: body.emoji || "✨",
       allow_splitting: body.allow_splitting ?? true,
-      min_split_cents: body.min_split_cents || 2500,
+      min_split_cents: body.min_split_cents || 5000,
       display_order: newOrder,
       is_active: body.is_active ?? true,
       funded_cents: 0,

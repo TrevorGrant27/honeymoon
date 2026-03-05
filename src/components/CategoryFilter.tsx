@@ -29,8 +29,8 @@ export function CategoryFilter({ selected, onChange }: CategoryFilterProps) {
               onClick={() => onChange(cat.value)}
               className={`px-5 py-2 rounded-full text-sm transition-all whitespace-nowrap flex-shrink-0 border ${
                 isActive
-                  ? "bg-blush-wash border-petal text-dark-brown font-medium"
-                  : "bg-white border-border-soft text-warm-brown hover:border-petal/60"
+                  ? "bg-linen border-border text-dark-brown font-medium shadow-sm"
+                  : "bg-white border-border-soft text-warm-brown hover:border-border hover:bg-linen/50"
               }`}
             >
               {cat.value !== "all" && (

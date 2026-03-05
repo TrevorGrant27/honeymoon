@@ -115,8 +115,8 @@ export function CheckoutForm({ experience, preselectedAmountCents }: CheckoutFor
                 }}
                 className={`py-3 rounded-xl font-display font-semibold text-base transition-all border ${
                   amountCents === amt
-                    ? "bg-rose text-white border-rose shadow-sm"
-                    : "bg-cream text-dark-brown border-border-soft hover:border-petal"
+                    ? "bg-gradient-to-r from-rose to-deep-rose text-white border-rose shadow-sm"
+                    : "bg-cream text-dark-brown border-border-soft hover:border-border"
                 }`}
               >
                 {amt === remainingCents ? `${formatCents(amt)} (All)` : formatCents(amt)}
@@ -154,7 +154,7 @@ export function CheckoutForm({ experience, preselectedAmountCents }: CheckoutFor
               else setError("Please select a valid amount.");
             }}
             disabled={amountCents <= 0}
-            className="btn-primary w-full mt-4 py-3 rounded-full bg-rose text-white font-medium tracking-wider disabled:opacity-40 disabled:cursor-not-allowed"
+            className="btn-primary w-full mt-4 py-3 rounded-full bg-gradient-to-r from-rose to-deep-rose text-white font-medium tracking-wider disabled:opacity-40 disabled:cursor-not-allowed"
           >
             Continue &mdash; {amountCents > 0 ? formatCents(amountCents) : "Select amount"}
           </button>
@@ -170,7 +170,7 @@ export function CheckoutForm({ experience, preselectedAmountCents }: CheckoutFor
             </h2>
 
             {allowSplit && (
-              <div className="flex items-center justify-between bg-blush-wash/50 rounded-xl px-4 py-3 mb-5 border border-petal/20">
+              <div className="flex items-center justify-between bg-linen/60 rounded-xl px-4 py-3 mb-5 border border-border-soft">
                 <span className="text-sm text-warm-brown italic">Your gift</span>
                 <div className="flex items-center gap-2">
                   <span className="font-display font-semibold text-dark-brown">
@@ -218,7 +218,7 @@ export function CheckoutForm({ experience, preselectedAmountCents }: CheckoutFor
           <button
             type="submit"
             disabled={loading}
-            className="btn-primary w-full py-4 rounded-full bg-rose text-white font-medium text-base tracking-wider shadow-sm disabled:opacity-40"
+            className="btn-primary w-full py-4 rounded-full bg-gradient-to-r from-rose to-deep-rose text-white font-medium text-base tracking-wider shadow-sm disabled:opacity-40"
           >
             {loading ? "Processing..." : `Proceed to Payment — ${formatCents(amountCents)}`}
           </button>
