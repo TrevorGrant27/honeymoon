@@ -15,7 +15,7 @@ function getUrgencyText(experience: ExperienceWithSponsors): string | null {
   const isFullyFunded = experience.funded_cents >= experience.price_cents;
   if (isFullyFunded) return null;
 
-  if (pct >= 75) return "Presque! Almost there";
+  if (pct >= 75) return "Almost there";
   if (experience.sponsors.length > 0 && pct >= 50)
     return `${experience.sponsors.length} gift${experience.sponsors.length > 1 ? "s" : ""} so far`;
   return null;

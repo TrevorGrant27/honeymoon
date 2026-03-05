@@ -192,7 +192,7 @@ export function ExperienceDetail({
         {isFullyFunded ? (
           <div className="text-center py-5 bg-sage/8 rounded-xl border border-sage/15">
             <span className="text-sage font-display font-semibold text-base italic">
-              Fully Gifted &mdash; Merci!
+              Fully Gifted
             </span>
             <p className="text-xs text-warm-brown mt-1 italic">
               Thank you to everyone who contributed!

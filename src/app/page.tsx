@@ -91,7 +91,7 @@ export default function HomePage() {
 
         <div className="relative max-w-3xl mx-auto px-4 pt-28 pb-24 sm:pt-36 sm:pb-28 text-center">
           <p className="text-muted-brown text-xs sm:text-sm mb-6 tracking-[0.35em] uppercase">
-            A Honeymoon Registry
+            The Honeymoon of
           </p>
           <h1 className="font-display font-bold text-5xl sm:text-7xl lg:text-8xl text-dark-brown mb-4 leading-[1.05] italic">
             Trevor &amp; Carly
@@ -99,12 +99,10 @@ export default function HomePage() {
           <div className="divider-ornament text-champagne text-sm max-w-[200px] mx-auto my-8">
             <span className="text-lavender">&#x269C;</span>
           </div>
-          <p className="text-warm-brown text-base sm:text-lg max-w-md mx-auto mb-4 leading-relaxed italic">
-            Help us create unforgettable memories in the South of France
-          </p>
-          <p className="text-muted-brown text-sm max-w-sm mx-auto leading-relaxed">
-            From lazy mornings on the Riviera to sunset ros&eacute; in Provence &mdash;
-            each experience below is a moment you can gift us.
+          <p className="text-warm-brown text-base sm:text-lg max-w-lg mx-auto leading-relaxed italic">
+            Help us create unforgettable memories on our honeymoon.
+            Each experience below is a moment you can gift us &mdash; from
+            sunset dinners to adventures we&apos;ll treasure forever.
           </p>
         </div>
 
@@ -158,7 +156,7 @@ export default function HomePage() {
           Our Experiences
         </h2>
         <p className="text-muted-brown text-center text-sm mb-12">
-          Gift us a moment in the South of France
+          Choose a memory to gift us
         </p>
 
         <div className="mb-12">
@@ -201,7 +199,7 @@ export default function HomePage() {
             {available.length === 0 && fullyFunded.length > 0 && (
               <div className="text-center py-12">
                 <p className="font-display italic text-warm-brown text-lg">
-                  Every experience in this category has been gifted! Merci!
+                  Every experience in this category has been gifted!
                 </p>
               </div>
             )}
@@ -214,11 +212,8 @@ export default function HomePage() {
         <div className="divider-ornament text-champagne text-sm max-w-[120px] mx-auto mb-6">
           <span className="text-lavender">&#x269C;</span>
         </div>
-        <p className="font-display italic text-muted-brown text-sm mb-1">
-          With love from the South of France
-        </p>
-        <p className="text-muted-brown/60 text-xs">
-          Trevor &amp; Carly&apos;s Honeymoon
+        <p className="font-display italic text-muted-brown text-sm">
+          Made with love for Trevor &amp; Carly&apos;s adventure
         </p>
         <a
           href="/admin"

@@ -20,7 +20,7 @@ export default function ThankYouPage({
 
   function handleShare() {
     const url = window.location.origin;
-    const text = "I just gifted an experience on Trevor & Carly's South of France honeymoon! Check it out:";
+    const text = "I just gifted an experience on Trevor & Carly's honeymoon registry! Check it out:";
     if (navigator.share) {
       navigator.share({ title: "Trevor & Carly's Honeymoon", text, url }).catch(() => {});
     } else {
@@ -40,11 +40,11 @@ export default function ThankYouPage({
           <span className="text-lavender">&#x269C;</span>
         </div>
         <h1 className="font-display font-semibold text-4xl sm:text-5xl text-dark-brown mb-4 italic">
-          Merci!
+          Thank You
         </h1>
         <p className="text-warm-brown text-base leading-relaxed mb-8 italic">
           Your gift means the world to Trevor &amp; Carly.
-          You&apos;re helping create an unforgettable memory in the South of France.
+          You&apos;re helping create an unforgettable honeymoon memory.
         </p>
 
         {/* Preview */}
