@@ -154,9 +154,6 @@ export function ExperienceDetail({
                 className="w-full pl-8 pr-4 py-3 rounded-xl bg-white border border-border-soft text-dark-brown focus:border-rose focus:outline-none transition-colors"
               />
             </div>
-            <p className="text-[11px] text-muted-brown mt-1.5 italic">
-              Min {formatCents(experience.min_split_cents)}
-            </p>
           </div>
         )}
 
