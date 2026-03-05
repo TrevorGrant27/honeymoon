@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Trevor & Carly's Honeymoon Registry",
+  title: "Trevor & Carly's South of France Honeymoon",
   description:
-    "Help us create unforgettable honeymoon memories. Browse and sponsor specific experiences from our trip!",
+    "Help us create unforgettable memories in the South of France. Browse and gift specific experiences from our honeymoon!",
 };
 
 export default function RootLayout({

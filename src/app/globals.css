@@ -1,33 +1,33 @@
 @import "tailwindcss";
 
 @theme {
-  /* Warm & Romantic — soft pastels, blush tones */
-  --color-ivory: #FDF9F4;
-  --color-cream: #FDF9F4;
-  --color-linen: #F5EDE4;
-  --color-sand: #F5EDE4;
-  --color-blush-wash: #FBF0EE;
-  --color-border: #E6D9CB;
-  --color-border-soft: #EDE4DA;
+  /* South of France — sun-drenched warmth, lavender & Mediterranean tones */
+  --color-ivory: #FDFAF5;
+  --color-cream: #FDFAF5;
+  --color-linen: #F3EDE3;
+  --color-sand: #F3EDE3;
+  --color-blush-wash: #F0F1F7;
+  --color-border: #D9D3C7;
+  --color-border-soft: #E6E0D6;
 
-  --color-espresso: #2F2623;
-  --color-dark-brown: #2F2623;
-  --color-sienna: #7A6555;
-  --color-warm-brown: #7A6555;
-  --color-dusty: #A8957F;
-  --color-muted-brown: #A8957F;
+  --color-espresso: #2A2520;
+  --color-dark-brown: #2A2520;
+  --color-sienna: #6B5D4F;
+  --color-warm-brown: #6B5D4F;
+  --color-dusty: #9E8E7A;
+  --color-muted-brown: #9E8E7A;
 
-  --color-blush: #D4979A;
-  --color-rose: #D4979A;
-  --color-deep-blush: #C48589;
-  --color-deep-rose: #C48589;
-  --color-petal: #E8C4C0;
+  --color-blush: #9B7DB8;
+  --color-rose: #9B7DB8;
+  --color-deep-blush: #8568A6;
+  --color-deep-rose: #8568A6;
+  --color-petal: #C9B8DA;
 
-  --color-sage: #8EAF8B;
-  --color-success: #8EAF8B;
-  --color-champagne: #C9AD7C;
-  --color-gold: #C9AD7C;
-  --color-lavender: #C0B4D4;
+  --color-sage: #7EA87E;
+  --color-success: #7EA87E;
+  --color-champagne: #D4A853;
+  --color-gold: #D4A853;
+  --color-lavender: #B8A9D4;
 
   --font-display: "Playfair Display", serif;
   --font-body: "Lora", serif;
@@ -90,8 +90,8 @@ body {
 
 .experience-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 50px rgba(47, 38, 35, 0.06),
-    0 8px 20px rgba(212, 151, 154, 0.08);
+  box-shadow: 0 20px 50px rgba(42, 37, 32, 0.06),
+    0 8px 20px rgba(155, 125, 184, 0.08);
 }
 
 /* Button hover */
@@ -101,7 +101,7 @@ body {
 
 .btn-primary:hover {
   transform: translateY(-1px);
-  box-shadow: 0 10px 30px rgba(212, 151, 154, 0.25);
+  box-shadow: 0 10px 30px rgba(155, 125, 184, 0.25);
 }
 
 /* Modal backdrop */
@@ -143,9 +143,9 @@ body {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 20% 50%, rgba(212, 151, 154, 0.06) 0%, transparent 60%),
-    radial-gradient(ellipse at 80% 30%, rgba(192, 180, 212, 0.05) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 80%, rgba(201, 173, 124, 0.04) 0%, transparent 50%);
+    radial-gradient(ellipse at 20% 50%, rgba(155, 125, 184, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 30%, rgba(184, 169, 212, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(212, 168, 83, 0.04) 0%, transparent 50%);
   pointer-events: none;
 }
 
@@ -189,5 +189,5 @@ body {
 /* Soft glow on focused inputs */
 input:focus,
 textarea:focus {
-  box-shadow: 0 0 0 3px rgba(212, 151, 154, 0.12);
+  box-shadow: 0 0 0 3px rgba(155, 125, 184, 0.12);
 }

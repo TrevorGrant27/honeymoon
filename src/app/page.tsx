@@ -15,7 +15,6 @@ export default function HomePage() {
   const [selectedExperience, setSelectedExperience] =
     useState<ExperienceWithSponsors | null>(null);
   const [detailOpen, setDetailOpen] = useState(false);
-  const [showFunded, setShowFunded] = useState(false);
 
   useEffect(() => {
     fetch("/api/experiences")
@@ -94,12 +93,12 @@ export default function HomePage() {
             Trevor &amp; Carly
           </h1>
           <p className="divider-ornament text-petal text-sm max-w-[200px] mx-auto my-8">
-            &hearts;
+            &#x2766;
           </p>
           <p className="text-warm-brown text-base sm:text-lg max-w-lg mx-auto mb-12 leading-relaxed italic">
-            Help us create unforgettable memories on our honeymoon.
+            Help us create unforgettable memories in the South of France.
             Each experience below is a moment you can gift us &mdash; from
-            sunset dinners to adventures we&apos;ll treasure forever.
+            lavender fields in Provence to sunset dinners along the C&ocirc;te d&apos;Azur.
           </p>
         </div>
       </section>
@@ -151,7 +150,7 @@ export default function HomePage() {
           Our Experiences
         </h2>
         <p className="text-muted-brown text-center text-sm mb-12">
-          Choose a memory to gift us
+          Gift us a moment in the South of France
         </p>
 
         <div className="mb-12">
@@ -174,57 +173,27 @@ export default function HomePage() {
           </div>
         ) : (
           <>
-            {available.length > 0 && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                {available.map((exp) => (
-                  <ExperienceCard
-                    key={exp.id}
-                    experience={exp}
-                    onClick={handleCardClick}
-                  />
-                ))}
-              </div>
-            )}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {available.map((exp) => (
+                <ExperienceCard
+                  key={exp.id}
+                  experience={exp}
+                  onClick={handleCardClick}
+                />
+              ))}
+              {fullyFunded.map((exp) => (
+                <ExperienceCard
+                  key={exp.id}
+                  experience={exp}
+                  onClick={handleCardClick}
+                />
+              ))}
+            </div>
 
-            {fullyFunded.length > 0 && (
-              <div className="mt-16">
-                <button
-                  onClick={() => setShowFunded(!showFunded)}
-                  className="w-full flex items-center justify-center gap-3 py-3 text-muted-brown hover:text-warm-brown transition-colors"
-                >
-                  <div className="h-px flex-1 bg-gradient-to-r from-transparent via-petal to-transparent" />
-                  <span className="text-[11px] font-medium whitespace-nowrap tracking-widest uppercase">
-                    {showFunded ? "Hide" : "View"} {fullyFunded.length} fully gifted
-                  </span>
-                  <svg
-                    className={`w-3.5 h-3.5 transition-transform ${showFunded ? "rotate-180" : ""}`}
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
-                  </svg>
-                  <div className="h-px flex-1 bg-gradient-to-r from-transparent via-petal to-transparent" />
-                </button>
-
-                {showFunded && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
-                    {fullyFunded.map((exp) => (
-                      <ExperienceCard
-                        key={exp.id}
-                        experience={exp}
-                        onClick={handleCardClick}
-                      />
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
-
-            {available.length === 0 && fullyFunded.length > 0 && !showFunded && (
+            {available.length === 0 && fullyFunded.length > 0 && (
               <div className="text-center py-12">
                 <p className="font-display italic text-warm-brown text-lg">
-                  Every experience in this category has been gifted!
+                  Every experience in this category has been gifted! Merci!
                 </p>
               </div>
             )}
@@ -235,10 +204,10 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="text-center py-12">
         <div className="divider-ornament text-petal text-sm max-w-[120px] mx-auto mb-6">
-          &hearts;
+          &#x2766;
         </div>
         <p className="font-display italic text-muted-brown text-sm">
-          Made with love for Trevor &amp; Carly&apos;s adventure
+          Made with love for Trevor &amp; Carly&apos;s South of France adventure
         </p>
         <a
           href="/admin"
