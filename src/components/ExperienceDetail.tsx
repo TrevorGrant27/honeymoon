@@ -199,7 +199,7 @@ export function ExperienceDetail({
           <button
             onClick={handleSponsorClick}
             disabled={allowSplit && selectedAmount <= 0}
-            className="btn-primary w-full py-4 rounded-full bg-gradient-to-r from-rose to-deep-rose text-white font-medium text-base tracking-wider shadow-sm disabled:opacity-40 disabled:cursor-not-allowed"
+            className="btn-primary w-full py-4 rounded-full bg-orange-100 text-orange-700 font-medium text-base tracking-wider shadow-sm disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {allowSplit && selectedAmount > 0
               ? `Gift ${formatCents(selectedAmount)}`
