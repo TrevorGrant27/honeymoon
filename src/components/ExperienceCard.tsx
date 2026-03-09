@@ -106,7 +106,7 @@ export function ExperienceCard({ experience, onClick }: ExperienceCardProps) {
 
         {!isFullyFunded && (
           <div className="mt-4">
-            <span className="block w-full py-2.5 rounded-full bg-gradient-to-r from-rose to-deep-rose text-white text-sm font-medium text-center tracking-wider shadow-sm">
+            <span className="block w-full py-2.5 rounded-full bg-orange-100 text-orange-700 text-sm font-medium text-center tracking-wider shadow-sm">
               {isPartiallyFunded ? "Contribute" : "Gift This"}
             </span>
           </div>
