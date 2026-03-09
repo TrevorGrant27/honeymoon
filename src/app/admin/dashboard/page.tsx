@@ -114,6 +114,20 @@ export default function AdminDashboard() {
     setShowForm(true);
   }
 
+  function duplicateExperience(exp: ExperienceWithSponsors) {
+    resetForm();
+    setFormTitle(`${exp.title} (Copy)`);
+    setFormDescription(exp.description);
+    setFormCategory(exp.category);
+    setFormPrice((exp.price_cents / 100).toString());
+    setFormEmoji(exp.emoji);
+    setFormImageUrl(exp.image_url || "");
+    setFormAllowSplitting(exp.allow_splitting);
+    setFormMinSplit((exp.min_split_cents / 100).toString());
+    setFormActive(exp.is_active);
+    setShowForm(true);
+  }
+
   async function handleFormSubmit(e: React.FormEvent) {
     e.preventDefault();
     setFormSaving(true);
@@ -585,6 +599,12 @@ export default function AdminDashboard() {
                               className="text-sm text-rose hover:text-deep-rose font-medium"
                             >
                               Edit
+                            </button>
+                            <button
+                              onClick={() => duplicateExperience(exp)}
+                              className="text-sm text-warm-brown hover:text-dark-brown font-medium"
+                            >
+                              Duplicate
                             </button>
                             <button
                               onClick={() => handleDelete(exp)}
