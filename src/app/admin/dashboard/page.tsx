@@ -593,22 +593,22 @@ export default function AdminDashboard() {
                           </button>
                         </td>
                         <td className="px-4 py-3">
-                          <div className="flex items-center gap-3">
+                          <div className="flex items-center gap-2">
                             <button
                               onClick={() => openEditForm(exp)}
-                              className="text-sm text-rose hover:text-deep-rose font-medium"
+                              className="text-sm px-3 py-1.5 rounded-lg bg-orange-100 text-orange-700 hover:bg-orange-200 font-medium transition-colors"
                             >
                               Edit
                             </button>
                             <button
                               onClick={() => duplicateExperience(exp)}
-                              className="text-sm text-warm-brown hover:text-dark-brown font-medium"
+                              className="text-sm px-3 py-1.5 rounded-lg bg-orange-100 text-orange-700 hover:bg-orange-200 font-medium transition-colors"
                             >
                               Duplicate
                             </button>
                             <button
                               onClick={() => handleDelete(exp)}
-                              className="text-sm text-red-500 hover:text-red-700 font-medium"
+                              className="text-sm px-3 py-1.5 rounded-lg bg-orange-100 text-orange-700 hover:bg-orange-200 font-medium transition-colors"
                             >
                               Delete
                             </button>
