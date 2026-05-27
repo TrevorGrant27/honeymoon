@@ -11,6 +11,7 @@ import type { ExperienceWithSponsors } from "@/types/database";
 export default function HomePage() {
   const [experiences, setExperiences] = useState<ExperienceWithSponsors[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedExperience, setSelectedExperience] =
     useState<ExperienceWithSponsors | null>(null);
@@ -18,15 +19,24 @@ export default function HomePage() {
 
   useEffect(() => {
     fetch("/api/experiences")
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to load experiences");
-        return res.json();
+      .then(async (res) => {
+        const data = await res.json().catch(() => null);
+        if (!res.ok) {
+          const msg =
+            (data && (data.message || data.error)) ||
+            `Request failed (${res.status})`;
+          throw new Error(msg);
+        }
+        return data;
       })
       .then((data) => {
         setExperiences(Array.isArray(data) ? data : []);
         setLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch((err) => {
+        setError(err?.message || "Failed to load experiences");
+        setLoading(false);
+      });
   }, []);
 
   const stats = useMemo(() => {
@@ -172,9 +182,15 @@ export default function HomePage() {
           </div>
         ) : available.length === 0 && fullyFunded.length === 0 ? (
           <div className="text-center py-16">
-            <p className="text-muted-brown italic">
-              No experiences found in this category.
-            </p>
+            {error ? (
+              <p className="text-muted-brown italic">
+                Couldn&apos;t load experiences: {error}
+              </p>
+            ) : (
+              <p className="text-muted-brown italic">
+                No experiences found in this category.
+              </p>
+            )}
           </div>
         ) : (
           <>

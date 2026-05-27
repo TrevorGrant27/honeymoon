@@ -2,11 +2,21 @@ import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 
 export async function GET() {
-  try {
-    if (!supabase) {
-      return NextResponse.json([]);
-    }
+  if (!supabase) {
+    console.error(
+      "[experiences] Supabase client not configured — set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY"
+    );
+    return NextResponse.json(
+      {
+        error: "supabase_not_configured",
+        message:
+          "Supabase is not configured. Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY.",
+      },
+      { status: 500 }
+    );
+  }
 
+  try {
     const { data: experiences, error: expError } = await supabase
       .from("experiences")
       .select("*")
@@ -14,7 +24,17 @@ export async function GET() {
       .order("display_order", { ascending: true });
 
     if (expError) {
-      return NextResponse.json([]);
+      console.error("[experiences] Failed to query experiences:", expError);
+      return NextResponse.json(
+        {
+          error: "experiences_query_failed",
+          message: expError.message,
+          code: expError.code ?? null,
+          hint: expError.hint ?? null,
+          details: expError.details ?? null,
+        },
+        { status: 500 }
+      );
     }
 
     const experienceIds = (experiences || []).map((e) => e.id);
@@ -29,6 +49,7 @@ export async function GET() {
       .in("experience_id", experienceIds);
 
     if (sponError) {
+      console.error("[experiences] Failed to query sponsors:", sponError);
       return NextResponse.json(
         (experiences || []).map((exp) => ({ ...exp, sponsors: [] }))
       );
@@ -47,7 +68,14 @@ export async function GET() {
     }));
 
     return NextResponse.json(result);
-  } catch {
-    return NextResponse.json([]);
+  } catch (err) {
+    console.error("[experiences] Unexpected error:", err);
+    return NextResponse.json(
+      {
+        error: "unexpected_error",
+        message: err instanceof Error ? err.message : String(err),
+      },
+      { status: 500 }
+    );
   }
 }
